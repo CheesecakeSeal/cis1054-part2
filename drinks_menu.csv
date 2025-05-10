@@ -1,6 +1,11 @@
-﻿id;name;description
-7;Water;Regular still water 1Litre
-8;Kinnie;Malta's favorite bitter sweet orange soft drink 500ml
-9;Coke;Worldwide popular soft drink 500ml
-10;Milk Tea with Tapioca;Homemade boba with milk tea and tapioca with drizzled caramel syrup 650ml
-11;Chinese Beer;Traditional light Chinese beer 300ml
+﻿id,name,description,category
+1,Still Water,"Pure, refreshing water.",Non-Alcoholic
+2,Sparkling Water,"Carbonated water for a fizzy refreshment.",Non-Alcoholic
+3,Green Tea,"Traditional Japanese tea with a slightly bitter, earthy flavour.",Non-Alcoholic
+4,Jasmin Tea,"Fragrant tea infused with jasmine blossoms.",Non-Alcoholic 
+5,Ramune,"Sweet Japanese carbonated soft drink.",Non-Alcoholic
+6,Sake,"Japanese rice wine with a smooth, slightly sweet flavour.",Alcoholic
+7,Umeshu (Plum Wine),"Sweet and fruity wine made from Japanese plums.",Alcoholic
+8,Asahi (Japanese Beer),"Light, crisp lager with a clean finish.",Alcoholic
+9,Sapporo (Japanese Beer),"Smooth, full-bodied lager with a refined bitterness.",Alcoholic
+
