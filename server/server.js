@@ -9,8 +9,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Serve everything in public/ at the web root
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve contact.html on GET /contact.html
+app.get('/contact.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'contact.html'));
+});
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -54,6 +56,4 @@ app.post('/api/contact', async (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Contact‐form API listening on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
