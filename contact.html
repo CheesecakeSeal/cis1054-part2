@@ -9,12 +9,12 @@
   <form action="/api/contact" method="post"> <!--JSON-style form data to an API endpoint at /api/contact-->
     <label>
     Your Name:
-      <input type="text" name="name" required>
+      <input type="text" name="name" required maxlength="100" pattern="^[A-Za-z0-9 _.'-]+$" title="Letters, numbers, spaces, and ._'- only">
     </label><br>
 
     <label>
     Your Email:
-      <input type="email" name="email" required>
+      <input type="email" name="email" required maxlength="100" pattern="^[A-Za-z0-9 _.'-]+$" title="Letters, numbers, spaces, and ._'- only">
     </label><br>
 
     <label>
