@@ -2,15 +2,15 @@ require('dotenv').config();            // ← load .env into process.env
 const express   = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
-
+const path = require('path');
 const app = express();
 
 // Parse incoming form data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// (Optional) Serve your static front-end, if you want Express to host it:
-app.use(express.static(__dirname + '/../public'));
+// Serve everything in public/ at the web root
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Your POST endpoint to receive the form
+// POST endpoint to receive the form
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -43,7 +43,7 @@ app.post('/api/contact', async (req, res) => {
   };
 
   try {
-    // Send to _both_ recipients at once
+    // Send to both recipients at once
     await transporter.sendMail(mailOptions);
     res.json({ success: true, msg: 'Message sent. Thank you!' });
   } catch (err) {
