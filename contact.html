@@ -4,13 +4,25 @@
   <meta charset="UTF-8">
   <title>Contact Us</title>
 </head>
-  <body>
-    <h1>Contact Us</h1>
-    <form action="/api/contact" method="post"> <!--JSON-style form data to an API endpoint at /api/contact. -->
-    <input name="name"    type="text"     required placeholder="Your Name">
-    <input name="email"   type="email"    required placeholder="Your Email">
-    <textarea name="message" required placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-    </form>
-  </body>
+<body>
+  <h1>Contact Us</h1>
+  <form action="/api/contact" method="post"> <!--JSON-style form data to an API endpoint at /api/contact-->
+    <label>
+    Your Name:
+      <input type="text" name="name" required>
+    </label><br>
+
+    <label>
+    Your Email:
+      <input type="email" name="email" required>
+    </label><br>
+
+    <label>
+    Message:
+      <textarea name="message" rows="6" required></textarea>
+    </label><br>
+
+    <button type="submit">Submit</button>
+  </form>
+</body>
 </html>
