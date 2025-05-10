@@ -3,32 +3,49 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Menu</title>
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     </head>
 
     <body>
         <h1>Our Menu</h1>
         <h2>Food</h2>
         <ul>
-            <li><a href="dish.html?id=1" >Spring Rolls</a></li>
-            <li><a href="dish.html?id=2" >Dumplings</a></li>
-            <li><a href="dish.html?id=3" >Crispy Prawns</a></li>
-            <li><a href="dish.html?id=4" >Sweet and Sour Pork</a></li>
-            <li><a href="dish.html?id=5" >Lemon Chicken</a></li>
-            <li><a href="dish.html?id=6" >Crispy Beef</a></li>
+            <ul id="food-list"></ul>
         </ul>
 
         <h2> Drinks </h2>
         <ul>
-            <li><a href="dish.html?id=7" >Water</a></li>
-            <li><a href="dish.html?id=8" >Kinnie</a></li>
-            <li><a href="dish.html?id=9" >Coke</a></li>
-            <li><a href="dish.html?id=10" >Milk Tea with Tapioca</a></li>
-            <li><a href="dish.html?id=11" >Chinese Beer</a></li>
+            <ul id="drinks-list"></ul>
         </ul>
 
         <nav>
             <a href="index.html">Home</a> |
             <a href="favourites.html">Favourites</a>
         </nav>
+
+        <script>
+            function loadCSV(file, targetId) {
+            fetch(file)
+                .then(response => response.text())
+                .then(csv => {
+                Papa.parse(csv, {
+                    header: true,
+                    skipEmptyLines: true,
+                    complete: function (results) {
+                    const target = document.getElementById(targetId);
+                    results.data.forEach(item => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `<a href="dish.html?id=${item.id}">${item.name}</a>`;
+                        target.appendChild(li);
+                    });
+                    }
+                });
+                });
+            }
+
+            // Load food.csv into #food-list and drinks.csv into #drinks-list
+            loadCSV("food menu.csv", "food-list");
+            loadCSV("drinks menu.csv", "drinks-list");
+        </script>
     </body>
 </html>
