@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5500;
 
 // Serve your static files (e.g. contact.html, support.html)
 app.use(express.static('public'));
