@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Favourites</title>
+</head>
+<body>
+    <h1>Your Favourites</h1>
+    <ul id="fav-list"></ul>
+
+    <!-- Mailtrap form submission -->
+    <form id="fav-form" action="/send-email" method="POST">
+        <!-- Identify this form type for the server -->
+        <input type="hidden" name="formType" value="Favourites" />
+        <!-- User email where list will be sent -->
+        <label>
+            Your Email:<br>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required />
+        </label><br><br>
+        <!-- Hidden inputs populated by script -->
+        <input type="hidden" name="name" id="name-input" />
+        <input type="hidden" name="subject" value="My Favourite Dishes" />
+        <input type="hidden" name="message" id="message-input" />
+
+        <button type="submit">Send List</button>
+    </form>
+
+    <script>
+        function renderFavourites() {
+            const list = document.getElementById("fav-list");
+            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+            list.innerHTML = "";
+            favs.forEach((dish, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>${dish.name}</strong>: ${dish.desc}
+                <button onclick="removeFavourite(${index})">Remove</button>`;
+                list.appendChild(li);
+            });
+        }
+
+        function removeFavourite(index) {
+            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+            favs.splice(index, 1);
+            localStorage.setItem("favourites", JSON.stringify(favs));
+            renderFavourites();
+        }
+
+        document.getElementById('fav-form').addEventListener('submit', function(event) {
+            // Before submitting, populate hidden fields
+            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+            const email = document.getElementById("email").value;
+            const nameInput = document.getElementById("name-input");
+            const messageInput = document.getElementById("message-input");
+
+            // Use the user's email as the 'name' field
+            nameInput.value = email;
+
+            // Build the message body
+            const bodyLines = favs.map(f => `${f.name}: ${f.desc}`);
+            messageInput.value = bodyLines.join("\n");
+
+            // Let the form submit normally to /send-email
+        });
+
+        // Initial render
+        renderFavourites();
+    </script>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="menu.html">Menu</a>
+    </nav>
+</body>
+</html>
+
+<!--
+If the above does not work, replace with this temporary code.
+Also move all html/csv files out of the public folder and back into cis1054-part2 except for complaints.html and contact.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Favourites</title>
+</head>
+<body>
+    <h1>Your Favourites</h1>
+    <ul id="fav-list"></ul>
+
+    <form onsubmit="sendEmail(); return false;">
+        <input type="email" id="email" placeholder="Enter your email" required />
+        <button type="submit">Send List</button>
+    </form>
+
+    <script>
+        function renderFavourites() {
+            const list = document.getElementById("fav-list");
+            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+            list.innerHTML = "";
+            favs.forEach((dish, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = <strong>${dish.name}</strong>: ${dish.desc}
+                <button onclick="removeFavourite(${index})">Remove</button>;
+                list.appendChild(li);
+            });
+        }
+
+    function removeFavourite(index) {
+        const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+        favs.splice(index, 1);
+        localStorage.setItem("favourites", JSON.stringify(favs));
+        renderFavourites();
+    }
+
+    function sendEmail() {
+        const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+        const email = document.getElementById("email").value;
+        const body = favs.map(f => ${f.name}: ${f.desc}).join("\n");
+
+        window.location.href = mailto:${email}?subject=My Favourite Dishes&body=${encodeURIComponent(body)};
+    }
+
+    renderFavourites();
+    </script>
+
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="menu.html">Menu</a>
+    </nav>
+</body>
+</html>
+-->

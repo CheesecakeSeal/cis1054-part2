@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve your static files (e.g. contact.html)
+// Serve your static files (e.g. contact.html, support.html)
 app.use(express.static('public'));
 
 // Parse form data
@@ -23,14 +23,15 @@ let transporter = nodemailer.createTransport({
 });
 
 app.post('/send-email', async (req, res) => {
-  const { name, email, subject, message } = req.body;
-  
+  const { name, email, subject, message, formType } = req.body;
+  const type = formType || 'Contact';
+
   const mailOptions = {
     from: process.env.EMAIL_FROM,
     to: process.env.EMAIL_TO.split(','),
-    subject: `[Contact Form] ${subject}`,
+    subject: `[${type} Form] ${subject}`,
     text: `
-You’ve received a new message via your Contact Us form from Kura Udo Sushi:
+You’ve received a new ${type.toLowerCase()} message via your ${type} form from Kura Udo Sushi:
 
 Name: ${name}
 Email: ${email}
@@ -44,7 +45,7 @@ ${message}
 
   try {
     await transporter.sendMail(mailOptions);
-    res.send('Thank you! Your message has been sent.');
+    res.send(`Thank you! Your ${type.toLowerCase()} request has been sent.`);
   } catch (err) {
     console.error('Error sending mail:', err);
     res.status(500).send('Oops! Something went wrong, please try again later.');
