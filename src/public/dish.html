@@ -33,6 +33,21 @@
             text-align: center;
             color: #990766;
         }
+
+        #fav-button {
+            background-color: #990766;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #fav-button:disabled {
+            background-color: #aaa;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +55,7 @@
         <h1 id="dish-name">Loading...</h1>
         <p id="dish-description"></p>
         <p><strong>Category:</strong> <span id="dish-category"></span></p>
+        <button id="fav-button" style="display: none;">Add to Favorites</button>
         <a class="back-link" href="menu.html">← Back to Menu</a>
     </div>
 
@@ -52,6 +68,8 @@
         const dishId = getQueryParam("id");
         const type = getQueryParam("type") || "food";
         const csvFile = type === "drink" ? "drinks_menu.csv" : "food_menu.csv";
+
+        const favButton = document.getElementById("fav-button");
 
         if (!dishId) {
             document.getElementById("dish-name").textContent = "No dish ID provided.";
@@ -69,16 +87,39 @@
                         skipEmptyLines: true,
                         complete: function(results) {
                             const dishes = results.data;
-                            console.log("Parsed dishes:", dishes);  // Debug: check parsed data
-
-                            // Use trim() on IDs to avoid whitespace issues
                             const dish = dishes.find(d => String(d.id).trim() === String(dishId).trim());
-                            console.log("Found dish:", dish);  // Debug: check found dish
 
                             if (dish) {
                                 document.getElementById("dish-name").textContent = dish.name;
                                 document.getElementById("dish-description").textContent = dish.description;
                                 document.getElementById("dish-category").textContent = dish.category;
+
+                                // Enable the favorites button
+                                favButton.style.display = "inline-block";
+
+                                // Check if already in favorites
+                                const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                                const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
+                                if (alreadyFavorited) {
+                                    favButton.textContent = "Already in Favorites";
+                                    favButton.disabled = true;
+                                }
+
+                                favButton.addEventListener("click", () => {
+                                    const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                                    const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
+
+                                    if (!alreadyFavorited) {
+                                        favs.push({
+                                            id: dish.id,
+                                            name: dish.name,
+                                            desc: dish.description
+                                        });
+                                        localStorage.setItem("favourites", JSON.stringify(favs));
+                                        favButton.textContent = "Added to Favorites!";
+                                        favButton.disabled = true;
+                                    }
+                                });
                             } else {
                                 document.getElementById("dish-name").textContent = "Dish Not Found";
                                 document.getElementById("dish-description").textContent = "";
