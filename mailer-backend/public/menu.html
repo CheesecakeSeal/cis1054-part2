@@ -1,83 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Menu</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <meta charset="UTF-8"/>
+    <title>Kura Udo Sushi</title>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
-    <h1>Our Menu</h1>
+    <!-- header -->
+    <h1>Up in the clouds, down on your tastebuds!</h1>
 
-    <h2>Food</h2>
-    <div id="food-list"></div>
+    <section>
+        <h2>About Us</h2>
+        <div id="about-section">Loading...</div>
+    </section>
 
-    <h2>Drinks</h2>
-    <div id="drinks-list"></div>
+    <section>
+        <h2>Meet the Team</h2>
+        <div id="team-section">Loading...</div>
+    </section>
 
     <nav>
-        <a href="index.html">Home</a> |
-        <a href="favourites.html">Favourites</a>
+        <a href="menu.html">View Menu</a> |
+        <a href="favourites.html">Favourites</a> |
+        <a href="contact.html">Contact Us</a> |
+        <a href="complaints.html">Complaints</a>
     </nav>
 
     <script>
-        // Function to load CSV and display items
-        function loadCSV(file, targetId) {
+        function loadMainPageCSV(file, aboutId, teamId) {
             fetch(file)
                 .then(response => response.text())
                 .then(csv => {
                     Papa.parse(csv, {
-                        header: true,
+                        header: false,
+                        delimiter: ";",
                         skipEmptyLines: true,
-                        complete: function (results) {
-                            const target = document.getElementById(targetId);
-                            const data = results.data;
+                        complete: function(results) {
+                            const aboutTarget = document.getElementById(aboutId);
+                            const teamTarget = document.getElementById(teamId);
 
-                            // Clear the target container before appending
-                            target.innerHTML = '';
+                            aboutTarget.innerHTML = "";
+                            teamTarget.innerHTML = "";
 
-                            // Group by category
-                            const grouped = {};
-                            data.forEach(item => {
-                                const category = item.category?.trim() || "Other";
-                                if (!grouped[category]) grouped[category] = [];
-                                grouped[category].push(item);
+                            results.data.slice(1).forEach(row => {
+                                const aboutText = row[0]?.trim();
+                                const teamText = row[1]?.trim();
+
+                                if (aboutText) {
+                                    const p = document.createElement("p");
+                                    p.textContent = aboutText;
+                                    aboutTarget.appendChild(p);
+                                }
+
+                                if (teamText) {
+                                    const p = document.createElement("p");
+                                    p.textContent = teamText;
+                                    teamTarget.appendChild(p);
+                                }
                             });
-
-                            // Sort categories
-                            for (const [category, items] of Object.entries(grouped)) {
-                                const heading = document.createElement("h3");
-                                heading.textContent = category;
-                                target.appendChild(heading);
-
-                                const ul = document.createElement("ul");
-                                items.forEach(item => {
-                                    const li = document.createElement("li");
-                                    li.innerHTML = `
-                                        <a href="dish.html?id=${encodeURIComponent(item.id)}">${item.name}</a><br/>
-                                        <small>${item.description}</small>
-                                    `;
-                                    ul.appendChild(li);
-                                });
-
-                                target.appendChild(ul);
-                            }
                         },
                         error: function(err) {
                             console.error("Error parsing CSV:", err);
-                            const target = document.getElementById(targetId);
-                            target.textContent = "Failed to load menu.";
+                            document.getElementById(aboutId).textContent = "Failed to load about section.";
+                            document.getElementById(teamId).textContent = "Failed to load team section.";
                         }
                     });
                 })
                 .catch(error => {
                     console.error("Error fetching CSV:", error);
-                    const target = document.getElementById(targetId);
-                    target.textContent = "Failed to load menu.";
+                    document.getElementById(aboutId).textContent = "Failed to load about section.";
+                    document.getElementById(teamId).textContent = "Failed to load team section.";
                 });
         }
 
-        loadCSV("food_menu.csv", "food-list");
-        loadCSV("drinks_menu.csv", "drinks-list");
+        loadMainPageCSV("main_page.csv", "about-section", "team-section");
     </script>
 </body>
 </html>
