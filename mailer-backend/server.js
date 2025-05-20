@@ -9,6 +9,11 @@ const PORT = process.env.PORT || 5500;
 // Serve your static files (e.g. contact.html, support.html)
 app.use(express.static('public'));
 
+// 404
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+});
+
 // Parse form data
 app.use(bodyParser.urlencoded({ extended: false }));
 
