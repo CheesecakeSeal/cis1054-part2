@@ -44,16 +44,19 @@
     </div>
 
     <script>
-        // Get query parameter by name
         function getQueryParam(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
         const dishId = getQueryParam("id");
+        const type = getQueryParam("type") || "food";
+        const csvFile = type === "drink" ? "drinks_menu.csv" : "food_menu.csv";
 
-        if (dishId) {
-            fetch("food_menu.csv")
+        if (!dishId) {
+            document.getElementById("dish-name").textContent = "No dish ID provided.";
+        } else {
+            fetch(csvFile)
                 .then(response => response.text())
                 .then(csv => {
                     Papa.parse(csv, {
@@ -61,7 +64,7 @@
                         skipEmptyLines: true,
                         complete: function(results) {
                             const dishes = results.data;
-                            const dish = dishes.find(d => d.id === dishId);
+                            const dish = dishes.find(d => String(d.id) === String(dishId));
 
                             if (dish) {
                                 document.getElementById("dish-name").textContent = dish.name;
@@ -69,16 +72,20 @@
                                 document.getElementById("dish-category").textContent = dish.category;
                             } else {
                                 document.getElementById("dish-name").textContent = "Dish Not Found";
+                                document.getElementById("dish-description").textContent = "";
+                                document.getElementById("dish-category").textContent = "";
                             }
+                        },
+                        error: function(err) {
+                            console.error("Error parsing CSV:", err);
+                            document.getElementById("dish-name").textContent = "Error loading dish.";
                         }
                     });
                 })
                 .catch(error => {
-                    console.error("Error loading CSV:", error);
+                    console.error("Error fetching CSV:", error);
                     document.getElementById("dish-name").textContent = "Error loading dish.";
                 });
-        } else {
-            document.getElementById("dish-name").textContent = "No dish ID provided.";
         }
     </script>
 </body>
