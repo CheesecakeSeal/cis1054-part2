@@ -6,7 +6,10 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 5500;
 
-// Serve your static files (e.g. contact.html, support.html)
+// strip CRLFs from header fields
+const sanitizeHeaderField = (str = '') => str.replace(/[\r\n]/g, ' ').trim();
+
+// Serve static files (e.g. contact.html, support.html)
 app.use(express.static('public'));
 
 // Parse form data
@@ -26,12 +29,17 @@ app.post('/send-email', async (req, res) => {
   const { name, email, subject, message, formType } = req.body;
   const type = formType || 'Contact';
 
+  // Sanitize header‐sensitive fields
+  const safeType    = sanitizeHeaderField(type);
+  const safeSubject = sanitizeHeaderField(subject);
+  const safeReplyTo = sanitizeHeaderField(email);
+
   const mailOptions = {
-    from: process.env.EMAIL_FROM,
-    to: process.env.EMAIL_TO.split(','),
-    subject: `[${type} Form] ${subject}`,
-    text: `
-You’ve received a new ${type.toLowerCase()} message via your ${type} form from Kura Udo Sushi:
+    from:    process.env.EMAIL_FROM,
+    to:      process.env.EMAIL_TO.split(',').map(addr => addr.trim()),
+    subject: `[${safeType} Form] ${safeSubject}`,
+    text:    `
+You’ve received a new ${safeType.toLowerCase()} message via your ${safeType} form from Kura Udo Sushi:
 
 Name: ${name}
 Email: ${email}
@@ -40,12 +48,12 @@ Subject: ${subject}
 Message:
 ${message}
     `,
-    replyTo: email
+    replyTo: safeReplyTo
   };
 
   try {
     await transporter.sendMail(mailOptions);
-    res.send(`Thank you! Your ${type.toLowerCase()} request has been sent.`);
+    res.send(`Thank you! Your ${safeType.toLowerCase()} request has been sent.`);
   } catch (err) {
     console.error('Error sending mail:', err);
     res.status(500).send('Oops! Something went wrong, please try again later.');
