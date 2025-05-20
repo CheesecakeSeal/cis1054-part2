@@ -1,38 +1,114 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Contact Us</title>
-  </head>
-  <body>
-    <h1>Contact Us</h1>
-    <form id="contact-form" action="/send-email" method="POST">
-      <label>
-        Name:<br>
-        <input type="text" name="name" required>
-      </label><br><br>
-    
-      <label>
-        Email:<br>
-        <input type="email" name="email" required>
-      </label><br><br>
-    
-      <label>
-        Subject:<br>
-        <input type="text" name="subject" required>
-      </label><br><br>
-    
-      <label>
-        Message:<br>
-        <textarea name="message" rows="6" required></textarea>
-      </label><br><br>
-    
-      <button type="submit">Submit</button>
-    </form>
-    
-    <nav>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us</title>
+  <style>
+    body {
+      background-color: #aeffc7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #1e3a19;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: #990766;
+    }
+
+    form {
+      background: white;
+      border: 3px dashed #990766;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 2px solid #1e3a19;
+      border-radius: 8px;
+      font-size: 1rem;
+      background-color: #f4fff7;
+    }
+
+    button {
+      background-color: #990766;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #7b054e;
+    }
+
+    nav {
+      margin-top: 30px;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: #990766;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <form id="contact-form" action="/send-email" method="POST">
+    <label>
+      Name:
+      <input type="text" name="name" required>
+    </label>
+  
+    <label>
+      Email:
+      <input type="email" name="email" required>
+    </label>
+  
+    <label>
+      Subject:
+      <input type="text" name="subject" required>
+    </label>
+  
+    <label>
+      Message:
+      <textarea name="message" rows="6" required></textarea>
+    </label>
+  
+    <button type="submit">Submit</button>
+  </form>
+
+  <nav>
     <a href="menu.html">Back to Menu</a> |
     <a href="favourites.html">Favourites</a>
-        </nav>
-  </body>
+  </nav>
+</body>
 </html>
