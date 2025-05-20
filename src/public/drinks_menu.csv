@@ -1,10 +1,10 @@
-﻿id,name,description,category
-"1,Still Water,""Pure, refreshing water."",Non-Alcoholic"
-"2,Sparkling Water,""Carbonated water for a fizzy refreshment."",Non-Alcoholic"
-"3,Green Tea,""Traditional Japanese tea with a slightly bitter, earthy flavour."",Non-Alcoholic"
-"4,Jasmin Tea,""Fragrant tea infused with jasmine blossoms."",Non-Alcoholic"
-"5,Ramune,""Sweet Japanese carbonated soft drink."",Non-Alcoholic"
-"6,Sake,""Japanese rice wine with a smooth, slightly sweet flavour."",Alcoholic"
-"7,Umeshu (Plum Wine),""Sweet and fruity wine made from Japanese plums."",Alcoholic"
-"8,Asahi (Japanese Beer),""Light, crisp lager with a clean finish."",Alcoholic"
-"9,Sapporo (Japanese Beer),""Smooth, full-bodied lager with a refined bitterness."",Alcoholic"
+﻿id;name;description;category
+1;Still Water;Pure, refreshing water.;
+2;Sparkling Water;Carbonated water for a fizzy refreshment.;
+3;Green Tea;Traditional Japanese tea with a slightly bitter, earthy flavour.;
+4;Jasmin Tea;Fragrant tea infused with jasmine blossoms.;
+5;Ramune;Sweet Japanese carbonated soft drink.;
+6;Sake;Japanese rice wine with a smooth, slightly sweet flavour.;
+7;Umeshu;Sweet and fruity wine made from Japanese plums.;
+8;Asahi;Light, crisp lager with a clean finish.;
+9;Sapporo;Smooth, full-bodied lager with a refined bitterness.;
