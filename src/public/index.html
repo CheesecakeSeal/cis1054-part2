@@ -1,153 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta charset="UTF-8"/>
-    <title>Kura Udo Sushi</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kura Udo Sushi</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 
 <body>
-    <section id = "header">
-        <div class = "container"> 
-            <nav>
-                <div class = "logo"><h1>Kura Udo Sushi</h1></div>
-
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="favourites.html">Favourites</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-                <div class="menu-button"><img src="Images/menu.svg" alt="Open Menu" /></div>
-            </nav>
-
-            <div class="header-container">
-                <h1>Kura Udo Sushi</h1>
-                <p>Up in the clouds, down on your tastebuds!</p>
-                <button class="primary-button">Menu</button>
-            </div>
-
+  <!-- header section with navigation -->
+  <section id="header">
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <h1>Kura Udo Sushi</h1>
         </div>
 
-</section>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="favourites.html">Favourites</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
 
-<!-- MEET THE TEAM SECTION -->
-<section id="team" class="container">
+        <!-- menu button for mobile navigation -->
+        <div class="menu-button">
+          <img src="Images/menu.svg" alt="Open Menu" />
+        </div>
+      </nav>
+
+      <div class="header-container">
+        <h1>Kura Udo Sushi</h1>
+        <p>Up in the clouds, down on your tastebuds!</p>
+        <button class="primary-button" onclick="location.href='menu.html'">Menu</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- meet the team section where team members are loaded dynamically -->
+  <section id="team" class="container">
     <h1>Meet the Team</h1>
-  <div id="team-section"></div>
-</section>
+    <div id="team-section"></div>
+  </section>
 
-<!-- ABOUT US SECTION -->
-<section id="about" class="container">
+  <!-- about us section with text and image -->
+  <section id="about" class="container">
     <div class="about-content">
-        <h1>About Us</h1>
-        <div id="about-section">Loading...</div>
+      <h1>About Us</h1>
+      <div id="about-section">Loading...</div>
     </div>
 
     <div class="about-image">
-        <img src="Images/about.jpg" alt="">
+      <img src="Images/about.jpg" alt="about kura udo sushi" />
     </div>
-</section>
+  </section>
 
-<!-- CONTACT US SECTION -->
- <section id="talk-to-us">
-    <div class="talk-to-us-content">
-        <h1>Talk to us</h1>
-        <p>Please!!!!</p>
-        <button class="primary-button">GET IN TOUCH</button>
+  <!-- contact us call to action section -->
+  <section id="contact-us">
+    <div class="contact-us-content">
+      <div class="text-wrapper">
+        <h1>Contact Us</h1>
+        <p>Have questions, feedback, or just want to say hello? We are always happy to hear from you!</p>
+        <button class="primary-button" onclick="location.href='contact.html'">Get in Touch</button>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
+  <!-- footer with navigation links and copyright -->
+  <footer>
     <ul class="footer-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Menu</a></li>
-        <li><a href="#">Favourites</a></li>
-        <li><a href="#">Contact Us</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="favourites.html">Favourites</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
     </ul>
     <h1 class="logo">Kura Udo Sushi</h1>
     <p>© 2025 Kura Udo Sushi. All rights reserved.</p>
-</footer>
+  </footer>
 
-<!-- NAVIGATION TOGGLE SCRIPT -->
- <script>
- const menuButton = document.querySelector(".menu-button"); 
- const navLinks = document.querySelector(".nav-links");
- menuButton.addEventListener("click", function() {
-    navLinks.classList.toggle("active"); 
-});
- </script>
+  <!-- navigation toggle script for mobile menu -->
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
 
-<!-- CSV LOAD SCRIPT -->
-   <script>
-function loadMainPageCSV(file, aboutId, teamId) {
-    fetch(file)
+    menuButton.addEventListener("click", function () {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+
+  <!-- csv load script to dynamically load about and team content -->
+  <script>
+    function loadMainPageCSV(file, aboutId, teamId) {
+      fetch(file)
         .then(response => response.text())
         .then(csv => {
-            Papa.parse(csv, {
-                header: true,
-                delimiter: ";",
-                skipEmptyLines: true,
-                complete: function(results) {
-                    const aboutTarget = document.getElementById(aboutId);
-                    const teamTarget = document.getElementById(teamId);
+          Papa.parse(csv, {
+            header: true,
+            delimiter: ";",
+            skipEmptyLines: true,
+            complete: function (results) {
+              const aboutTarget = document.getElementById(aboutId);
+              const teamTarget = document.getElementById(teamId);
 
-                    // Clear old content
-                    aboutTarget.innerHTML = "";
-                    teamTarget.innerHTML = "";
+              // clear old content before loading new
+              aboutTarget.innerHTML = "";
+              teamTarget.innerHTML = "";
 
-                    // Load About section
-                    const aboutText = results.data[0]["GenericInfo"];
-                    const aboutP = document.createElement("p");
-                    aboutP.textContent = aboutText;
-                    aboutTarget.appendChild(aboutP);
+              // load about section text from csv
+              const aboutText = results.data[0]["GenericInfo"];
+              const aboutP = document.createElement("p");
+              aboutP.textContent = aboutText;
+              aboutTarget.appendChild(aboutP);
 
-                    // Load team members
-                    Object.keys(results.data[0]).forEach(key => {
-                        if (key.startsWith("Member")) {
-                            const raw = results.data[0][key];
-                            const [name, role, image] = raw.split(" - ");
+              // load team members from csv keys starting with "Member"
+              Object.keys(results.data[0]).forEach(key => {
+                if (key.startsWith("Member")) {
+                  const raw = results.data[0][key];
+                  const [name, role, image] = raw.split(" - ");
 
-                            const div = document.createElement("div");
-                            div.className = "team";
+                  const div = document.createElement("div");
+                  div.className = "team";
 
-                            const img = document.createElement("img");
-                            img.src = image.trim();
-                            img.alt = name;
+                  const img = document.createElement("img");
+                  img.src = image.trim();
+                  img.alt = name.trim();
 
-                            const h3 = document.createElement("h3");
-                            h3.textContent = name.trim();
+                  const h3 = document.createElement("h3");
+                  h3.textContent = name.trim();
 
-                            const p = document.createElement("p");
-                            p.textContent = role.trim();
+                  const p = document.createElement("p");
+                  p.textContent = role.trim();
 
-                            div.appendChild(img);
-                            div.appendChild(h3);
-                            div.appendChild(p);
+                  div.appendChild(img);
+                  div.appendChild(h3);
+                  div.appendChild(p);
 
-                            teamTarget.appendChild(div);
-                        }
-                    });
-                },
-                error: function(err) {
-                    console.error("Error parsing CSV:", err);
-                    document.getElementById(aboutId).textContent = "Failed to load about section.";
-                    document.getElementById(teamId).textContent = "Failed to load team section.";
+                  teamTarget.appendChild(div);
                 }
-            });
+              });
+            },
+            error: function (err) {
+              console.error("error parsing csv:", err);
+              document.getElementById(aboutId).textContent = "failed to load about section.";
+              document.getElementById(teamId).textContent = "failed to load team section.";
+            }
+          });
         })
         .catch(error => {
-            console.error("Error fetching CSV:", error);
-            document.getElementById(aboutId).textContent = "Failed to load about section.";
-            document.getElementById(teamId).textContent = "Failed to load team section.";
+          console.error("error fetching csv:", error);
+          document.getElementById(aboutId).textContent = "failed to load about section.";
+          document.getElementById(teamId).textContent = "failed to load team section.";
         });
-}
+    }
 
-loadMainPageCSV("main_page.csv", "about-section", "team-section");
-</script>
+    // call function to load csv data into about and team sections
+    loadMainPageCSV("main_page.csv", "about-section", "team-section");
+  </script>
 </body>
+
 </html>
