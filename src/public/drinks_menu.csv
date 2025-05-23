@@ -1,8 +1,7 @@
-﻿id;name;description;category
-1;Still Water;Pure, refreshing water.; Non-Alcoholic
-2;Green Tea;Traditional Japanese tea with a slightly bitter, earthy flavour.; Non-Alcoholic
-3;Ramune;Sweet Japanese carbonated soft drink.; Non-Alcoholic
-4;Sake;Japanese rice wine with a smooth, slightly sweet flavour.; Alcoholic
-5;Umeshu;Sweet and fruity wine made from Japanese plums.; Alcoholic
-6;Asahi;Light, crisp lager with a clean finish.; Alcoholic
-
+﻿id,name,description,category,calories,protein,fat,carbohydrates,image,price
+1,Still Water,"Pure, refreshing water.",Non-Alcoholic,0,0,0,0,Images/still-water.jpg,€1.50
+2,Green Tea,"Traditional Japanese tea with a slightly bitter, earthy flavour.",Non-Alcoholic,0,0,0,0,Images/green-tea.jpg,€2.00
+3,Ramune,"Sweet Japanese carbonated soft drink.",Non-Alcoholic,70,0,0,18,Images/ramune.jpg,€3.00
+4,Sake,"Japanese rice wine with a smooth, slightly sweet flavour.",Alcoholic,130,0,0,5,Images/sake.jpg,€5.50
+5,Umeshu,"Sweet and fruity wine made from Japanese plums.",Alcoholic,155,0,0,20,Images/umeshu.jpg,€6.00
+6,Asahi,"Light, crisp lager with a clean finish.",Alcoholic,150,1,0,11,Images/asahi.jpg,€4.50
