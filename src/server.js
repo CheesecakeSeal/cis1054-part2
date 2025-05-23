@@ -53,11 +53,17 @@ ${message}
 
   try {
     await transporter.sendMail(mailOptions);
-    res.send(`Thank you! Your ${safeType.toLowerCase()} request has been sent.`);
+    // redirect to a confirmation page instead of inline response
+    res.redirect('/email-sent');
   } catch (err) {
     console.error('Error sending mail:', err);
     res.status(500).send('Oops! Something went wrong, please try again later.');
   }
+});
+
+// serve the email-sent confirmation page
+app.get('/email-sent', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'email-sent.html'));
 });
 
 app.listen(PORT, () => {
