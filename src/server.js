@@ -32,17 +32,17 @@ app.post('/send-email', async (req, res) => {
   // Sanitize header‐sensitive fields
   const safeType    = sanitizeHeaderField(type);
   const safeSubject = sanitizeHeaderField(subject);
-  const safeName    = sanitizeHeaderField(name);    // ← new
-  const safeEmail   = sanitizeHeaderField(email);   // ← new
+  const safeName    = sanitizeHeaderField(name);    
+  const safeEmail   = sanitizeHeaderField(email);   
 
   // choose recipients based on form type
   const toField = (safeType === 'Favourites')
     ? `${safeName} <${safeEmail}>`
-    : process.env.EMAIL_TO.split(',').map(addr => addr.trim());  // ← modified
+    : process.env.EMAIL_TO.split(',').map(addr => addr.trim());  
 
   const mailOptions = {
     from:    process.env.EMAIL_FROM,
-    to:      toField,                         // ← modified
+    to:      toField,                         
     subject: `[${safeType} Form] ${safeSubject}`,
     text:    `
 You’ve received a new ${safeType.toLowerCase()} message via your ${safeType} form from Kura Udo Sushi:
@@ -67,7 +67,7 @@ ${message}
   }
 });
 
-// serve the email-sent confirmation page
+// email-sent confirmation page
 app.get('/email-sent', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'email-sent.html'));
 });
