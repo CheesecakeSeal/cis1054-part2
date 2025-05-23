@@ -1,13 +1,6 @@
-/* 
-  Import Google Fonts: Agbalumo and Jost 
-  --------------------------------------------------
-*/
+
 @import url("https://fonts.googleapis.com/css2?family=Agbalumo&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* 
-  CSS Variables for easy color management 
-  --------------------------------------------------
-*/
 :root {
   --primary-light: #74a84a;
   --primary-dark: #2c541d;
@@ -15,10 +8,6 @@
   --white: #efefef;
 }
 
-/* 
-  Reset and Base Styles 
-  --------------------------------------------------
-*/
 * {
   margin: 0;
   padding: 0;
@@ -37,7 +26,7 @@ a {
 }
 
 /* 
-  header Section Styles 
+  header section styles 
   --------------------------------------------------
 */
 #header {
@@ -48,10 +37,6 @@ a {
   background-size: cover;
 }
 
-/* 
-  Container Utility Class 
-  --------------------------------------------------
-*/
 .container {
   max-width: 1200px;
   margin: auto;
@@ -218,7 +203,7 @@ nav .logo {
   margin-top: 120px;
 }
 
-.contact-us-content {
+.contact-us-container {
   position: relative;
   z-index: 2;
   display: flex;
@@ -240,14 +225,6 @@ nav .logo {
   color: var(--black);
 }
 
-.contact-us-content p {
-  max-width: 500px;
-}
-
-.contact-us-content h1 {
-  font-size: 30px;
-  color: var(--black);
-}
 
 /* 
   footer styles 
@@ -269,6 +246,9 @@ footer ul {
 footer .logo {
   color: var(--primary-dark);
 }
+
+
+
 
 /* 
   contact page specific styles 
@@ -300,16 +280,21 @@ form {
   margin-left: 60px;
 }
 
+
+
 /* 
   form inputs 
   --------------------------------------------------
 */
 #contact-form input,
 #contact-form textarea {
-  padding: 12px 16px;
+  padding: 12px ;
+  font-size: 16px;
   width: 100%;
   border: 1px solid var(--primary-dark);
-  outline: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+ 
 }
 
 /* 
@@ -357,8 +342,114 @@ form {
     height: 32px;
 }
 
+
+
+
+
+#menu-header {
+  min-height: 400px;
+  background-image: url("Images/menu.jpg"); /* Use your menu image */
+  background-size: cover;
+  background-position: center;
+  margin-top: 0;
+  position: relative;
+}
+
+
+.menu-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  text-align: center;
+  padding: 32px 16px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+
+.text-wrapper {
+  background-color: rgba(128, 147, 134, 0.5);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  color: var(--black);
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+}
+
+.menu-container h2 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: var(--black);
+}
+
+.menu-container h3 {
+  font-size: 22px;
+  margin-top: 24px;
+  color: var(--black);
+}
+
+
+.menu-container hr {
+  width: 50%;
+  margin: 24px auto;
+  border: none;
+  border-top: 1px solid #033205;
+}
+
+#food-list ul,
+#drinks-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+#food-list li,
+#drinks-list li {
+  text-align: center;
+  font-size: 1.1em;
+}
+
+#food-list a,
+#drinks-list a {
+  color: var(--primary-dark);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#food-list a:hover,
+#drinks-list a:hover {
+  color: #022f1b;
+  transform: scale(1.05);
+}
+small {
+  display: block;
+  color: #444;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* 
   responsive styles for mobile devices 
+  (reminder: add menu and 404 page!!!!!!)
   --------------------------------------------------
 */
 @media only screen and (max-width: 520px) {
