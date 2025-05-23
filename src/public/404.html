@@ -1,53 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>404 - Page Not Found</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #aeffc7;
-            color: #990766;
-            text-align: center;
-            padding: 50px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found</title>
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-        }
+  <link rel="stylesheet" href="styles.css" />
 
-        h1 {
-            font-size: 4rem;
-            color: #990766;
-        }
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--black, #000);
+    }
 
-        p {
-            font-size: 1.25rem;
-        }
+    #error-404 {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+    }
 
-        a {
-            color: #1e3a19;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    .error-content {
+      background-color: rgba(128, 147, 134, 0.5);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(3px);
+      max-width: 500px;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    .error-content h1 {
+      font-size: 80px;
+      margin: 0;
+    }
 
-        .sushi-emoji {
-            font-size: 3rem;
-            margin: 20px 0;
-        }
-    </style>
+    .error-content .sushi-emoji {
+      font-size: 48px;
+      margin: 16px 0;
+    }
+
+    .error-content p {
+      font-size: 18px;
+      margin: 12px 0;
+    }
+
+    .error-content a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background-color: var(--primary-dark, #022f1b);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .error-content a:hover {
+      background-color: #03502f;
+    }
+    
+  </style>
 </head>
-    <body>
-        <div class="container">
-            <h1>404</h1>
-            <div class="sushi-emoji">🍣</div>
-            <p>Oops! The page you're looking for has rolled away.</p>
-            <p><a href="index.html">Go back to homepage</a></p>
-        </div>
-    </body>
+<body>
+  <section id="error-404">
+    <div class="error-content">
+      <h1>404</h1>
+      <div class="sushi-emoji">🍣</div>
+      <p>Oops! The page you are looking for has rolled away... <br />
+        Better luck next time!</p>
+      <p><a href="index.html">Go back to homepage</a></p>
+    </div>
+  </section>
+</body>
 </html>
