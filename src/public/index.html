@@ -65,100 +65,100 @@
         <h1>Contact Us</h1>
         <p>Have questions, feedback, or just want to say hello? We are always happy to hear from you!</p>
         <button class="primary-button" onclick="location.href='contact.html'">Get in Touch</button>
-      </div>
+        </div>
     </div>
-  </section>
+    </section>
 
-  <!-- footer with navigation links and copyright -->
-  <footer>
+    <!-- footer with navigation links and copyright -->
+    <footer>
     <ul class="footer-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="menu.html">Menu</a></li>
-      <li><a href="favourites.html">Favourites</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="favourites.html">Favourites</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
     </ul>
     <h1 class="logo">Kura Udo Sushi</h1>
     <p>© 2025 Kura Udo Sushi. All rights reserved.</p>
-  </footer>
+    </footer>
 
-  <!-- navigation toggle script for mobile menu -->
-  <script>
+    <!-- navigation toggle script for mobile menu -->
+    <script>
     const menuButton = document.querySelector(".menu-button");
     const navLinks = document.querySelector(".nav-links");
 
     menuButton.addEventListener("click", function () {
-      navLinks.classList.toggle("active");
+        navLinks.classList.toggle("active");
     });
-  </script>
+    </script>
 
-  <!-- csv load script to dynamically load about and team content -->
-  <script>
+    <!-- csv load script to dynamically load about and team content -->
+    <script>
     function loadMainPageCSV(file, aboutId, teamId) {
-      fetch(file)
-        .then(response => response.text())
-        .then(csv => {
-          Papa.parse(csv, {
+        fetch(file)
+            .then(response => response.text())
+            .then(csv => {
+            Papa.parse(csv, {
             header: true,
             delimiter: ";",
             skipEmptyLines: true,
             complete: function (results) {
-              const aboutTarget = document.getElementById(aboutId);
-              const teamTarget = document.getElementById(teamId);
+                const aboutTarget = document.getElementById(aboutId);
+                const teamTarget = document.getElementById(teamId);
 
               // clear old content before loading new
-              aboutTarget.innerHTML = "";
-              teamTarget.innerHTML = "";
+                aboutTarget.innerHTML = "";
+                teamTarget.innerHTML = "";
 
               // load about section text from csv
-              const aboutText = results.data[0]["GenericInfo"];
-              const aboutP = document.createElement("p");
-              aboutP.textContent = aboutText;
-              aboutTarget.appendChild(aboutP);
+                const aboutText = results.data[0]["GenericInfo"];
+                const aboutP = document.createElement("p");
+                aboutP.textContent = aboutText;
+                aboutTarget.appendChild(aboutP);
 
-              // load team members from csv keys starting with "Member"
-              Object.keys(results.data[0]).forEach(key => {
+                // load team members from csv keys starting with "Member"
+                Object.keys(results.data[0]).forEach(key => {
                 if (key.startsWith("Member")) {
-                  const raw = results.data[0][key];
-                  const [name, role, image] = raw.split(" - ");
+                    const raw = results.data[0][key];
+                    const [name, role, image] = raw.split(" - ");
 
-                  const div = document.createElement("div");
-                  div.className = "team";
+                    const div = document.createElement("div");
+                    div.className = "team";
 
-                  const img = document.createElement("img");
-                  img.src = image.trim();
-                  img.alt = name.trim();
+                    const img = document.createElement("img");
+                    img.src = image.trim();
+                    img.alt = name.trim();
 
-                  const h3 = document.createElement("h3");
-                  h3.textContent = name.trim();
+                    const h3 = document.createElement("h3");
+                    h3.textContent = name.trim();
 
-                  const p = document.createElement("p");
-                  p.textContent = role.trim();
+                    const p = document.createElement("p");
+                    p.textContent = role.trim();
 
-                  div.appendChild(img);
-                  div.appendChild(h3);
-                  div.appendChild(p);
+                    div.appendChild(img);
+                    div.appendChild(h3);
+                    div.appendChild(p);
 
-                  teamTarget.appendChild(div);
+                    teamTarget.appendChild(div);
                 }
-              });
+                });
             },
             error: function (err) {
-              console.error("error parsing csv:", err);
-              document.getElementById(aboutId).textContent = "failed to load about section.";
-              document.getElementById(teamId).textContent = "failed to load team section.";
+                console.error("error parsing csv:", err);
+                document.getElementById(aboutId).textContent = "failed to load about section.";
+                document.getElementById(teamId).textContent = "failed to load team section.";
             }
-          });
+            });
         })
         .catch(error => {
-          console.error("error fetching csv:", error);
-          document.getElementById(aboutId).textContent = "failed to load about section.";
-          document.getElementById(teamId).textContent = "failed to load team section.";
+            console.error("error fetching csv:", error);
+            document.getElementById(aboutId).textContent = "failed to load about section.";
+            document.getElementById(teamId).textContent = "failed to load team section.";
         });
     }
 
     // call function to load csv data into about and team sections
     loadMainPageCSV("main_page.csv", "about-section", "team-section");
-  </script>
+    </script>
 </body>
 
 </html>
