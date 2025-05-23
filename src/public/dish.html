@@ -4,57 +4,11 @@
     <meta charset="UTF-8" />
     <title>Dish Details</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #aeffc7;
-            color: #1e3a19;
-            padding: 20px;
-        }
-
-        .dish-container {
-            background-color: white;
-            border: 2px solid #990766;
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 4px 12px rgba(153, 7, 102, 0.2);
-        }
-
-        h1 {
-            color: #990766;
-            text-align: center;
-        }
-
-        .back-link {
-            display: block;
-            margin-top: 20px;
-            text-align: center;
-            color: #990766;
-        }
-
-        #fav-button {
-            background-color: #990766;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        #fav-button:disabled {
-            background-color: #aaa;
-            cursor: not-allowed;
-        }
-    </style>
 </head>
 <body>
     <div class="dish-container">
         <h1 id="dish-name">Loading...</h1>
         <p id="dish-description"></p>
-        <p><strong>Category:</strong> <span id="dish-category"></span></p>
         <button id="fav-button" style="display: none;">Add to Favorites</button>
         <a class="back-link" href="menu.html">← Back to Menu</a>
     </div>
@@ -92,7 +46,6 @@
                             if (dish) {
                                 document.getElementById("dish-name").textContent = dish.name;
                                 document.getElementById("dish-description").textContent = dish.description;
-                                document.getElementById("dish-category").textContent = dish.category;
 
                                 // Enable the favorites button
                                 favButton.style.display = "inline-block";
@@ -123,7 +76,6 @@
                             } else {
                                 document.getElementById("dish-name").textContent = "Dish Not Found";
                                 document.getElementById("dish-description").textContent = "";
-                                document.getElementById("dish-category").textContent = "";
                             }
                         },
                         error: function(err) {
