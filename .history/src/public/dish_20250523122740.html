@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dish Details</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+    <div class="dish-container">
+        <h1 id="dish-name">Loading...</h1>
+        <p id="dish-description"></p>
+        <div class="dish-info">
+            <p><strong>Calories:</strong> <span id="dish-calories"></span> kcal</p>
+            <p><strong>Protein:</strong> <span id="dish-protein"></span> g</p>
+            <p><strong>Fat:</strong> <span id="dish-fat"></span> g</p>
+            <p><strong>Carbohydrates:</strong> <span id="dish-carbs"></span> g</p>
+        </div>
+        <button id="fav-button" style="display: none;">Add to Favorites</button>
+        <a class="back-link" href="menu.html">← Back to Menu</a>
+    </div>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const dishId = getQueryParam("id");
+        const type = getQueryParam("type") || "food";
+        const csvFile = type === "drink" ? "drinks_menu.csv" : "food_menu.csv";
+        const favButton = document.getElementById("fav-button");
+
+        if (!dishId) {
+            document.getElementById("dish-name").textContent = "No dish ID provided.";
+        } else {
+            fetch(csvFile)
+                .then(response => response.text())
+                .then(csv => {
+                    Papa.parse(csv, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            const dishes = results.data;
+                            const dish = dishes.find(d => String(d.id).trim() === String(dishId).trim());
+
+                            if (dish) {
+                                document.getElementById("dish-name").textContent = dish.name;
+                                document.getElementById("dish-description").textContent = dish.description || "No description available.";
+                                document.getElementById("dish-calories").textContent = dish.calories || "N/A";
+                                document.getElementById("dish-protein").textContent = dish.protein || "N/A";
+                                document.getElementById("dish-fat").textContent = dish.fat || "N/A";
+                                document.getElementById("dish-carbs").textContent = dish.carbohydrates || "N/A";
+
+                                // Enable the favorites button
+                                favButton.style.display = "inline-block";
+
+                                const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                                const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
+                                if (alreadyFavorited) {
+                                    favButton.textContent = "Already in Favorites";
+                                    favButton.disabled = true;
+                                }
+
+                                favButton.addEventListener("click", () => {
+                                    const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                                    if (!favs.some(f => f.id === dish.id && f.name === dish.name)) {
+                                        favs.push({
+                                            id: dish.id,
+                                            name: dish.name,
+                                            desc: dish.description
+                                        });
+                                        localStorage.setItem("favourites", JSON.stringify(favs));
+                                        favButton.textContent = "Added to Favorites!";
+                                        favButton.disabled = true;
+                                    }
+                                });
+                            } else {
+                                document.getElementById("dish-name").textContent = "Dish Not Found";
+                            }
+                        },
+                        error: function(err) {
+                            console.error("Error parsing CSV:", err);
+                            document.getElementById("dish-name").textContent = "Error loading dish.";
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error("Error fetching CSV:", error);
+                    document.getElementById("dish-name").textContent = "Error loading dish.";
+                });
+        }
+    </script>
+</body>
+</html>

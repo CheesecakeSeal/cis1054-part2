@@ -447,6 +447,14 @@ small {
   }
 }
 
+/* 
+  dish header styles — matches other headers 
+  --------------------------------------------------
+*/
+/* 
+  dish header - simplified static background like other headers 
+  --------------------------------------------------
+*/
 #dish-header {
   min-height: 400px;
   background-image: url("Images/dish.jpg"); /* Replace with the correct image path */
@@ -454,6 +462,7 @@ small {
   background-position: center;
   margin-top: 0;
 }
+
 
 /* 
   responsive styles for mobile devices 

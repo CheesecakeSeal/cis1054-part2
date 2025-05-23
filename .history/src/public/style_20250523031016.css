@@ -447,14 +447,6 @@ small {
   }
 }
 
-#dish-header {
-  min-height: 400px;
-  background-image: url("Images/dish.jpg"); /* Replace with the correct image path */
-  background-size: cover;
-  background-position: center;
-  margin-top: 0;
-}
-
 /* 
   responsive styles for mobile devices 
   (reminder: add menu and 404 page!!!!!!)
