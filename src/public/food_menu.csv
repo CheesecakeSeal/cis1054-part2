@@ -1,29 +1,29 @@
-﻿id,name,description,category
-1,Edamame,"Lightly salted boiled soybeans in their pods.",Appetizers
-2,Miso Soup,"Traditional Japanese soup with miso paste, tofu, seaweed, and green onions.",Appetizers
-3,Seaweed Salad,"Marinated seaweed tossed with sesame seeds and a tangy dressing.",Appetizers
-4,Gyoza (5 pcs),"Pan-fried dumplings filled with ground pork and vegetables.",Appetizers
-5,Takoyaki (4 pcs),"Ball-shaped snacks filled with diced octopus, topped with savory sauces and bonito flakes.",Appetizers
-6,Salmon Nigiri,"A slice of fresh salmon draped over seasoned rice, offering a buttery texture and rich flavours.",Nigiri 
-7,Tuna Nigiri,"Lean tuna atop seasoned rice, known for its clean taste and firm texture.",Nigiri 
-8,Eel Nigiri,"Grilled freshwater eel glazed with sweet soy-sauce, served over seasoned rice.",Nigiri 
-9,Shrimp Nigiri,"Cooked shrimp placed on seasoned rice, offering a slightly sweet flavour.",Nigiri 
-10,Tamago Nigiri,"A sweet Japanese omelette slice atop seasoned rice, secured with a nori strip.",Nigiri  
-11,Salmon Sashimi,"Thinly sliced raw salmon, prized for its rich flavour and buttery texture.",Sashimi 
-12,Tuna Sashimi,"Slices of raw tuna, offering a firm texture and mild flavour.",Sashimi 
-13,Octopus Sashimi,"Thin slices of cooked octopus, known for their chewy texture and subtle taste.",Sashimi 
-14,Yellowtail Sashimi,"Slices of yellowtail fish, offering a delicate flavour and smooth texture.",Sashimi 
-15,California Roll,"An inside-out roll with crab, avocado, and cucumber, often topped with sesame seeds or fish roe.",Sushi Rolls 
-16,Spicy Tuna Roll,"A roll filled with spicy seasoned tuna and cucumber, wrapped in nori and rice.",Sushi Rolls 
-17,Philadelphia Roll,"Combines smoked salmon, cream cheese, and avocado for a creamy, savory taste.",Sushi Rolls 
-18,Dragon Roll,"Features eel and cucumber inside, topped with thin avocado slices and eel sauce.",Sushi Rolls 
-19,Rainbow Roll,"A California roll topped with assorted slices of raw fish, creating a colorful presentation.",Sushi Rolls 
-20,Tempura Shrimp Roll,"Crispy tempura shrimp with avocado and cucumber, drizzled with eel sauce.",Sushi Rolls 
-21,Avocado Roll,"Simple roll with creamy avocado slices wrapped in rice and nori.",Vegetarian
-22,Cucumber Maki,"Refreshing roll with crisp cucumber strips.",Vegetarian
-23,Sweet Potato Roll,"Roasted sweet potato wrapped in rice and nori, offering a sweet and savory flavor.",Vegetarian
-24,Vegetable Futomaki,"A thick roll filled with assorted vegetables like cucumber, avocado, and pickled radish.",Vegetarian
-25,Mochi Ice Cream (2pc),"Soft, chewy mochi rice cake filled with ice cream in flavors like vanilla, strawberry, and green tea.",Desserts
-26,Matcha Green Tea Cheesecake,"Creamy cheesecake infused with earthy matcha flavor, offering a balance of sweetness and bitterness.",Desserts
-27,Dorayaki,"Two fluffy pancakes filled with sweet red bean paste.",Desserts
-28,Taiyaki,"Fish-shaped cake filled with sweet fillings like red bean paste or custard.",Desserts
+﻿id,name,description,category,calories,protein,fat,carbohydrates
+1,Edamame,"Lightly salted boiled soybeans in their pods.",Appetizers,120,11,5,10
+2,Miso Soup,"Traditional Japanese soup with miso paste, tofu, seaweed, and green onions.",Appetizers,40,3,1.5,4
+3,Seaweed Salad,"Marinated seaweed tossed with sesame seeds and a tangy dressing.",Appetizers,70,2,4,7
+4,Gyoza (5 pcs),"Pan-fried dumplings filled with ground pork and vegetables.",Appetizers,190,7,8,22
+5,Takoyaki (4 pcs),"Ball-shaped snacks filled with diced octopus, topped with savory sauces and bonito flakes.",Appetizers,220,8,12,20
+6,Salmon Nigiri,"A slice of fresh salmon draped over seasoned rice, offering a buttery texture and rich flavours.",Nigiri,60,5,2,7
+7,Tuna Nigiri,"Lean tuna atop seasoned rice, known for its clean taste and firm texture.",Nigiri,50,6,1,6
+8,Eel Nigiri,"Grilled freshwater eel glazed with sweet soy-sauce, served over seasoned rice.",Nigiri,90,6,4,8
+9,Shrimp Nigiri,"Cooked shrimp placed on seasoned rice, offering a slightly sweet flavour.",Nigiri,60,5,1,7
+10,Tamago Nigiri,"A sweet Japanese omelette slice atop seasoned rice, secured with a nori strip.",Nigiri,80,3,3,10
+11,Salmon Sashimi,"Thinly sliced raw salmon, prized for its rich flavour and buttery texture.",Sashimi,40,5,3,0
+12,Tuna Sashimi,"Slices of raw tuna, offering a firm texture and mild flavour.",Sashimi,35,7,1,0
+13,Octopus Sashimi,"Thin slices of cooked octopus, known for their chewy texture and subtle taste.",Sashimi,40,6,1,1
+14,Yellowtail Sashimi,"Slices of yellowtail fish, offering a delicate flavour and smooth texture.",Sashimi,45,6,2,0
+15,California Roll,"An inside-out roll with crab, avocado, and cucumber, often topped with sesame seeds or fish roe.",Sushi Rolls,255,7,9,33
+16,Spicy Tuna Roll,"A roll filled with spicy seasoned tuna and cucumber, wrapped in nori and rice.",Sushi Rolls,290,10,11,32
+17,Philadelphia Roll,"Combines smoked salmon, cream cheese, and avocado for a creamy, savory taste.",Sushi Rolls,320,8,18,28
+18,Dragon Roll,"Features eel and cucumber inside, topped with thin avocado slices and eel sauce.",Sushi Rolls,370,12,16,45
+19,Rainbow Roll,"A California roll topped with assorted slices of raw fish, creating a colorful presentation.",Sushi Rolls,340,13,11,38
+20,Tempura Shrimp Roll,"Crispy tempura shrimp with avocado and cucumber, drizzled with eel sauce.",Sushi Rolls,375,10,17,40
+21,Avocado Roll,"Simple roll with creamy avocado slices wrapped in rice and nori.",Vegetarian,140,2,5,22
+22,Cucumber Maki,"Refreshing roll with crisp cucumber strips.",Vegetarian,110,2,0.5,22
+23,Sweet Potato Roll,"Roasted sweet potato wrapped in rice and nori, offering a sweet and savory flavor.",Vegetarian,180,2,3,35
+24,Vegetable Futomaki,"A thick roll filled with assorted vegetables like cucumber, avocado, and pickled radish.",Vegetarian,190,3,4,36
+25,Mochi Ice Cream (2pc),"Soft, chewy mochi rice cake filled with ice cream in flavors like vanilla, strawberry, and green tea.",Desserts,200,3,5,35
+26,Matcha Green Tea Cheesecake,"Creamy cheesecake infused with earthy matcha flavor, offering a balance of sweetness and bitterness.",Desserts,320,5,22,25
+27,Dorayaki,"Two fluffy pancakes filled with sweet red bean paste.",Desserts,270,6,6,48
+28,Taiyaki,"Fish-shaped cake filled with sweet fillings like red bean paste or custard.",Desserts,230,5,7,38
