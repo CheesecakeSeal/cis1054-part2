@@ -129,7 +129,8 @@
               <a href="dish.html?id=${id}&type=${type}">
                 ${item.name}
               </a><br/>
-              <small>${item.description}</small>
+              <small>${item.description}</small> 
+              <strong>${item.price || ""}</strong>
             </li>
           `);
         });
