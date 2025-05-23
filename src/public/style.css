@@ -226,6 +226,10 @@ nav .logo {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2px);
   color: var(--black);
+
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* ---------------
@@ -585,12 +589,33 @@ small {
   background-size: cover;
   background-position: center;
   position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
+nav {
+  position: relative;
+  z-index: 10; 
+}
+
+#dish-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  z-index: 1;
+}
+/* changes link color when on dish page */
+body.dish-page nav a {
+  color: white;
+}
+
+#dish-header h1 {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
 /* description paragraph styling */
 #dish-description {
   text-align: center;

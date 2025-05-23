@@ -9,10 +9,10 @@
   <!-- link to CSS stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- library for CSV parsing  -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+   <!-- library for CSV parsing  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
-
+<body class="dish-page">
 <body>
   <!-- header section for navigation -->
   <section id="dish-header">
@@ -39,26 +39,44 @@
 
       <!-- page header -->
       <div class="header-container">
-        <h1 id="dish-name" class="dish-title">Loading...</h1>
+        <div class="text-wrapper"> 
+        <h1 id="dish-name">Loading...</h1>
       </div>
     </div>
-  </section> 
+  </section>
 
+ 
 </head>
-<body>
- <div class="dish-container">
-  <p id="dish-description"></p>
-  <div class="dish-info">
-    <p><strong>Calories:</strong> <span id="dish-calories"></span> kcal</p>
-    <p><strong>Protein:</strong> <span id="dish-protein"></span> g</p>
-    <p><strong>Fat:</strong> <span id="dish-fat"></span> g</p>
-    <p><strong>Carbohydrates:</strong> <span id="dish-carbs"></span> g</p>
-  </div>
-  <button id="fav-button" style="display: none;">Add to Favorites</button>
-  <a class="back-link" href="menu.html">← Back to Menu</a>
-</div>
 
-    <!-- footer with navigation links and copyright -->
+<body>
+  <!-- main dish content -->
+  <div class="dish-container">
+    <p id="dish-description"></p>
+    <div class="nutrition-section">
+  <div class="nutrition-card">
+    <h3>Calories</h3>
+    <p id="dish-calories">Loading...</p>
+  </div>
+  <div class="nutrition-card">
+    <h3>Protein</h3>
+    <p id="dish-protein">Loading...</p>
+  </div>
+  <div class="nutrition-card">
+    <h3>Fat</h3>
+    <p id="dish-fat">Loading...</p>
+  </div>
+  <div class="nutrition-card">
+    <h3>Carbs</h3>
+    <p id="dish-carbs">Loading...</p>
+  </div>
+</div>
+      <div class="button-container">
+    <button id="fav-button">Add to Favorites</button>
+    <a class="back-link" href="menu.html">Back to Menu</a>
+  </div>
+  </div>
+
+  <!-- footer -->
   <footer>
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
@@ -70,92 +88,90 @@
     <p>© 2025 Kura Udo Sushi. All rights reserved.</p>
   </footer>
 
-  <!-- javascript for toggling navigation menu on mobile -->
+  <!-- JS: menu toggle -->
   <script>
-    // menu button and navigation links container
     const menuButton = document.querySelector(".menu-button");
     const navLinks = document.querySelector(".nav-links");
 
-    // add click event listener to toggle the 'active' class on nav links
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
     });
   </script>
-</body>
 
-    <script>
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
+  <!-- JS: dish loading and favorites -->
+  <script>
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
 
-        const dishId = getQueryParam("id");
-        const type = getQueryParam("type") || "food";
-        const csvFile = type === "drink" ? "drinks_menu.csv" : "food_menu.csv";
-        const favButton = document.getElementById("fav-button");
+    const dishId = getQueryParam("id");
+    const type = getQueryParam("type") || "food";
+    const csvFile = type === "drink" ? "drinks_menu.csv" : "food_menu.csv";
+    const favButton = document.getElementById("fav-button");
 
-        if (!dishId) {
-            document.getElementById("dish-name").textContent = "No dish ID provided.";
-        } else {
-            fetch(csvFile)
-                .then(response => response.text())
-                .then(csv => {
-                    Papa.parse(csv, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: function(results) {
-                            const dishes = results.data;
-                            const dish = dishes.find(d => String(d.id).trim() === String(dishId).trim());
+    if (!dishId) {
+      document.getElementById("dish-name").textContent = "No dish ID provided.";
+    } else {
+      fetch(csvFile)
+        .then(response => response.text())
+        .then(csv => {
+          Papa.parse(csv, {
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+              const dishes = results.data;
+              const dish = dishes.find(d => String(d.id).trim() === String(dishId).trim());
 
-                           if (dish) {
-                            document.getElementById("dish-name").textContent = dish.name;
-                            document.getElementById("dish-description").textContent = dish.description || "No description available.";
-                            document.getElementById("dish-calories").textContent = dish.calories || "N/A";
-                            document.getElementById("dish-protein").textContent = dish.protein || "N/A";
-                            document.getElementById("dish-fat").textContent = dish.fat || "N/A";
-                            document.getElementById("dish-carbs").textContent = dish.carbohydrates || "N/A";
+              if (dish) {
+                document.getElementById("dish-name").textContent = dish.name;
+                document.getElementById("dish-description").textContent = dish.description || "No description available.";
+                document.getElementById("dish-calories").textContent = dish.calories || "N/A";
+                document.getElementById("dish-protein").textContent = dish.protein || "N/A";
+                document.getElementById("dish-fat").textContent = dish.fat || "N/A";
+                document.getElementById("dish-carbs").textContent = dish.carbohydrates || "N/A";
 
-                            if (dish.image) {
-                                document.getElementById("dish-header").style.backgroundImage = `url(${dish.image})`;
-                            }
-                                // Enable the favorites button
-                                favButton.style.display = "inline-block";
+                if (dish.image) {
+                  document.getElementById("dish-header").style.backgroundImage = `url(${dish.image})`;
+                }
 
-                                const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-                                const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
-                                if (alreadyFavorited) {
-                                    favButton.textContent = "Already in Favorites";
-                                    favButton.disabled = true;
-                                }
+                favButton.style.display = "inline-block";
 
-                                favButton.addEventListener("click", () => {
-                                    const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-                                    if (!favs.some(f => f.id === dish.id && f.name === dish.name)) {
-                                        favs.push({
-                                            id: dish.id,
-                                            name: dish.name,
-                                            desc: dish.description
-                                        });
-                                        localStorage.setItem("favourites", JSON.stringify(favs));
-                                        favButton.textContent = "Added to Favorites!";
-                                        favButton.disabled = true;
-                                    }
-                                });
-                            } else {
-                                document.getElementById("dish-name").textContent = "Dish Not Found";
-                            }
-                        },
-                        error: function(err) {
-                            console.error("Error parsing CSV:", err);
-                            document.getElementById("dish-name").textContent = "Error loading dish.";
-                        }
+                const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
+                if (alreadyFavorited) {
+                  favButton.textContent = "Already in Favorites";
+                  favButton.disabled = true;
+                }
+
+                favButton.addEventListener("click", () => {
+                  const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+                  if (!favs.some(f => f.id === dish.id && f.name === dish.name)) {
+                    favs.push({
+                      id: dish.id,
+                      name: dish.name,
+                      desc: dish.description
                     });
-                })
-                .catch(error => {
-                    console.error("Error fetching CSV:", error);
-                    document.getElementById("dish-name").textContent = "Error loading dish.";
+                    localStorage.setItem("favourites", JSON.stringify(favs));
+                    favButton.textContent = "Added to Favorites!";
+                    favButton.disabled = true;
+                  }
                 });
-        }
-    </script>
+              } else {
+                document.getElementById("dish-name").textContent = "Dish Not Found";
+              }
+            },
+            error: function(err) {
+              console.error("Error parsing CSV:", err);
+              document.getElementById("dish-name").textContent = "Error loading dish.";
+            }
+          });
+        })
+        .catch(error => {
+          console.error("Error fetching CSV:", error);
+          document.getElementById("dish-name").textContent = "Error loading dish.";
+        });
+    }
+  </script>
 </body>
 </html>
