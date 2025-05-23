@@ -1,42 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>My Favourites</title>
-</head>
-<body>
-    <h1>Your Favourites</h1>
-    <ul id="fav-list"></ul>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kura Udo Sushi</title>
+
+  <!-- link to CSS stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- header section for navigation -->
+  <section id="favourites">
+    <div class="container">
+      <nav>
+        <!-- site name -->
+        <div class="logo">
+          <h1>Kura Udo Sushi</h1>
+        </div>
+
+        <!-- button for toggling navigation on mobile devices -->
+        <button class="menu-button" aria-label="Toggle navigation">
+          &#9776;
+        </button>
+
+        <!-- navigation links -->
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="favourites.html">Favourites</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- page header -->
+      <div class="header-container">
+        <h1>My Favourites</h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- favourites list section -->
+<section id="favourites-list" class="container">
+    <div class="favourites-container">
+        <ul id="fav-list"></ul>
+    </div>
     <!-- Mailtrap form submission -->
-    <form id="fav-form" action="/send-email" method="POST">
-        <!-- Identify this form type for the server -->
-        <input type="hidden" name="formType" value="Favourites" />
-        <!-- User email where list will be sent -->
-        <label>
-            Your Email:<br>
-            <input type="email" name="email" id="email" placeholder="Enter your email" required />
-        </label><br><br>
-        <!-- Hidden inputs populated by script -->
-        <input type="hidden" name="name" id="name-input" />
+    <!-- Email form to send favourites -->
+    <div class="email-form-container">
+      <h2>Send Your Favourites</h2>
+      <p>Enter your email to receive a list of your favourite dishes.</p>
+      <form id="fav-form" action="/send-email" method="POST">
+        <input type="hidden" name="formType" value="Favourites" />   
+        <label for="email">Enter your Email:</label><br> 
+        <input type="email" name="email" id="email" placeholder="e.g. you@example.com" required /><br><br>   
+        <input type="hidden" name="name" id="name-input" />    
         <input type="hidden" name="subject" value="My Favourite Dishes" />
         <input type="hidden" name="message" id="message-input" />
+    <button type="submit" class="primary-button">Send List</button>
+  </form>
+</div>
+</section>
 
-        <button type="submit">Send List</button>
-    </form>
+      <!-- footer with navigation links and copyright -->
+  <footer>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="favourites.html">Favourites</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <h1 class="logo">Kura Udo Sushi</h1>
+    <p>© 2025 Kura Udo Sushi. All rights reserved.</p>
+  </footer>
+
+  <!-- javascript for toggling navigation menu on mobile -->
+  <script>
+    // menu button and navigation links container
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+
+    // add click event listener to toggle the 'active' class on nav links
+    menuButton.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
 
     <script>
         function renderFavourites() {
-            const list = document.getElementById("fav-list");
-            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-            list.innerHTML = "";
-            favs.forEach((dish, index) => {
-                const li = document.createElement("li");
-                li.innerHTML = `<strong>${dish.name}</strong>: ${dish.desc}
-                <button onclick="removeFavourite(${index})">Remove</button>`;
-                list.appendChild(li);
-            });
-        }
+    const list = document.getElementById("fav-list");
+    const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+    list.innerHTML = "";
+
+    favs.forEach((dish, index) => {
+        const li = document.createElement("li");
+        li.className = "fav-item";
+        li.innerHTML = `
+            <div class="fav-content">
+                <strong>${dish.name}</strong><br />
+                <span>${dish.desc}</span>
+                <div class="button-wrapper">
+                    <button class="primary-button" onclick="removeFavourite(${index})">Remove</button>
+                </div>
+            </div>
+        `;
+        list.appendChild(li);
+    });
+}
 
         function removeFavourite(index) {
             const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
@@ -65,10 +136,5 @@
         // Initial render
         renderFavourites();
     </script>
-
-    <nav>
-        <a href="index.html">Home</a> |
-        <a href="menu.html">Menu</a>
-    </nav>
 </body>
 </html>
