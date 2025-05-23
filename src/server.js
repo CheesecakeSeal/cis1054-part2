@@ -32,23 +32,29 @@ app.post('/send-email', async (req, res) => {
   // Sanitize header‐sensitive fields
   const safeType    = sanitizeHeaderField(type);
   const safeSubject = sanitizeHeaderField(subject);
-  const safeReplyTo = sanitizeHeaderField(email);
+  const safeName    = sanitizeHeaderField(name);    // ← new
+  const safeEmail   = sanitizeHeaderField(email);   // ← new
+
+  // choose recipients based on form type
+  const toField = (safeType === 'Favourites')
+    ? `${safeName} <${safeEmail}>`
+    : process.env.EMAIL_TO.split(',').map(addr => addr.trim());  // ← modified
 
   const mailOptions = {
     from:    process.env.EMAIL_FROM,
-    to:      process.env.EMAIL_TO.split(',').map(addr => addr.trim()),
+    to:      toField,                         // ← modified
     subject: `[${safeType} Form] ${safeSubject}`,
     text:    `
 You’ve received a new ${safeType.toLowerCase()} message via your ${safeType} form from Kura Udo Sushi:
 
-Name: ${name}
-Email: ${email}
-Subject: ${subject}
+Name: ${safeName}
+Email: ${safeEmail}
+Subject: ${safeSubject}
 
 Message:
 ${message}
     `,
-    replyTo: safeReplyTo
+    replyTo: safeEmail
   };
 
   try {
