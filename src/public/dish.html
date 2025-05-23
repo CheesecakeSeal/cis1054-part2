@@ -1,23 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <title>Dish Details</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kura Udo Sushi</title>
+
+  <!-- link to CSS stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- library for CSV parsing  -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+
+<body>
+  <!-- header section for navigation -->
+  <section id="dish-header">
+    <div class="container">
+      <nav>
+        <!-- site name -->
+        <div class="logo">
+          <h1>Kura Udo Sushi</h1>
+        </div>
+
+        <!-- button for toggling navigation on mobile devices -->
+        <button class="menu-button" aria-label="Toggle navigation">
+          &#9776;
+        </button>
+
+        <!-- navigation links -->
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="favourites.html">Favourites</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
+
+      <!-- page header -->
+      <div class="header-container">
+        <h1 id="dish-name" class="dish-title">Loading...</h1>
+      </div>
+    </div>
+  </section> 
+
 </head>
 <body>
-    <div class="dish-container">
-        <h1 id="dish-name">Loading...</h1>
-        <p id="dish-description"></p>
-        <div class="dish-info">
-            <p><strong>Calories:</strong> <span id="dish-calories"></span> kcal</p>
-            <p><strong>Protein:</strong> <span id="dish-protein"></span> g</p>
-            <p><strong>Fat:</strong> <span id="dish-fat"></span> g</p>
-            <p><strong>Carbohydrates:</strong> <span id="dish-carbs"></span> g</p>
-        </div>
-        <button id="fav-button" style="display: none;">Add to Favorites</button>
-        <a class="back-link" href="menu.html">← Back to Menu</a>
-    </div>
+ <div class="dish-container">
+  <p id="dish-description"></p>
+  <div class="dish-info">
+    <p><strong>Calories:</strong> <span id="dish-calories"></span> kcal</p>
+    <p><strong>Protein:</strong> <span id="dish-protein"></span> g</p>
+    <p><strong>Fat:</strong> <span id="dish-fat"></span> g</p>
+    <p><strong>Carbohydrates:</strong> <span id="dish-carbs"></span> g</p>
+  </div>
+  <button id="fav-button" style="display: none;">Add to Favorites</button>
+  <a class="back-link" href="menu.html">← Back to Menu</a>
+</div>
+
+    <!-- footer with navigation links and copyright -->
+  <footer>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="menu.html">Menu</a></li>
+      <li><a href="favourites.html">Favourites</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <h1 class="logo">Kura Udo Sushi</h1>
+    <p>© 2025 Kura Udo Sushi. All rights reserved.</p>
+  </footer>
+
+  <!-- javascript for toggling navigation menu on mobile -->
+  <script>
+    // menu button and navigation links container
+    const menuButton = document.querySelector(".menu-button");
+    const navLinks = document.querySelector(".nav-links");
+
+    // add click event listener to toggle the 'active' class on nav links
+    menuButton.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+</body>
 
     <script>
         function getQueryParam(name) {
@@ -43,14 +107,17 @@
                             const dishes = results.data;
                             const dish = dishes.find(d => String(d.id).trim() === String(dishId).trim());
 
-                            if (dish) {
-                                document.getElementById("dish-name").textContent = dish.name;
-                                document.getElementById("dish-description").textContent = dish.description || "No description available.";
-                                document.getElementById("dish-calories").textContent = dish.calories || "N/A";
-                                document.getElementById("dish-protein").textContent = dish.protein || "N/A";
-                                document.getElementById("dish-fat").textContent = dish.fat || "N/A";
-                                document.getElementById("dish-carbs").textContent = dish.carbohydrates || "N/A";
+                           if (dish) {
+                            document.getElementById("dish-name").textContent = dish.name;
+                            document.getElementById("dish-description").textContent = dish.description || "No description available.";
+                            document.getElementById("dish-calories").textContent = dish.calories || "N/A";
+                            document.getElementById("dish-protein").textContent = dish.protein || "N/A";
+                            document.getElementById("dish-fat").textContent = dish.fat || "N/A";
+                            document.getElementById("dish-carbs").textContent = dish.carbohydrates || "N/A";
 
+                            if (dish.image) {
+                                document.getElementById("dish-header").style.backgroundImage = `url(${dish.image})`;
+                            }
                                 // Enable the favorites button
                                 favButton.style.display = "inline-block";
 
