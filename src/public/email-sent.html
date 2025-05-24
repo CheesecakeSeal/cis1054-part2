@@ -1,41 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Complaint Request</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Email Sent</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--black, #000);
+    }
+
+    #email-sent {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .emailconfirm-content {
+      background-color: rgba(128, 147, 134, 0.5);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(3px);
+      max-width: 500px;
+    }
+
+    .emailconfirm-content h1 {
+      font-size: 80px;
+      margin: 0;
+    }
+
+    .emailconfirm-content .sushi-emoji {
+      font-size: 48px;
+      margin: 16px 0;
+    }
+
+    .emailconfirm-content p {
+      font-size: 18px;
+      margin: 12px 0;
+    }
+
+    .emailconfirm-content a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background-color: var(--primary-dark, #022f1b);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .emailconfirm-content a:hover {
+      background-color: #03502f;
+    }
+    
+  </style>
 </head>
 <body>
-  <h1>Complaint Request</h1>
-  <form action="/send-email" method="POST">
-    <input type="hidden" name="formType" value="Complaints">
-    
-    <label>
-      Name:<br>
-      <input type="text" name="name" required>
-    </label><br><br>
-
-    <label>
-      Email:<br>
-      <input type="email" name="email" required>
-    </label><br><br>
-
-    <label>
-      Subject:<br>
-      <input type="text" name="subject" required>
-    </label><br><br>
-
-    <label>
-      Description of issue:<br>
-      <textarea name="message" rows="6" required></textarea>
-    </label><br><br>
-
-    <button type="submit">Submit Complaint</button>
-  </form>
-
-  <nav>
-    <a href="menu.html">Back to Menu</a> |
-    <a href="favourites.html">Favourites</a>
-        </nav>
-        
+  <section id="email-sent">
+    <div class="emailconfirm-content">
+      <h1>Submitted!</h1>
+      <div class="sushi-emoji">🍣</div>
+      <p>Your email has been sent!</p>
+      <p><a href="index.html">Go back to homepage</a></p>
+    </div>
+  </section>
 </body>
 </html>
