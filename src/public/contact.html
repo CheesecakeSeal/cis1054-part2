@@ -42,39 +42,42 @@
         <h1>Contact Us</h1>
       </div>
     </div>
-  </section>
+  </section> 
 
   <!-- main contact section -->
   
   <section id="contact" class="container">
     <div class="contact-us-container">
-      
+      <h1>Fill in the Form</h1>
+      <div class="inputs">
       <!-- contact form for users to send messages -->
       <form id="contact-form" action="/send-email" method="POST">
+        <h1></h1>
         <label for="name">
           Name:
-          <input type="text" id="name" name="name" required />
+          <input type="text" placeholder="Your name" id="name" name="name" required />
         </label>
 
         <label for="email">
           Email:
-          <input type="email" id="email" name="email" required />
+          <input type="email" placeholder="you@example.com"email" name="email" required />
         </label>
 
         <label for="subject">
           Subject:
-          <input type="text" id="subject" name="subject" required />
+          <input type="text" placeholder="Entre Subject" id="subject" name="subject" required />
         </label>
 
         <label for="message">
           Message:
-          <textarea id="message" name="message" rows="6" required></textarea>
+          <textarea id="message" placeholder="Entre Message" name="message" rows="6" required></textarea>
         </label>
 
         <!-- submit button to send the form -->
         <button type="submit" class="primary-button">SUBMIT</button>
       </form>
     </div>
+  </div>
 
     <!-- contact details and social media links -->
     <div class="address">
@@ -94,7 +97,7 @@
           <img src="Images/phone-call.png" alt="Phone Icon" />
           <div class="text">
             <h6>PHONE NUMBER</h6>
-            <p>+356 9999 9999</p>
+            <p>+356 0000 0000</p>
           </div>
         </div>
 
@@ -109,7 +112,7 @@
               Malta
             </p>
           </div>
-        </div>
+        </div> 
 
         <!-- opening hours -->
         <div class="detail">
@@ -131,7 +134,12 @@
         </ul>
       </div>
     </div>
+          <!-- embedded google map inside contact section -->
+          <div class="map">
+            <h1>Location Map</h1>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d833.436925080446!2d14.50658561791088!3d35.91349976972494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smt!4v1748186931540!5m2!1sen!2smt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>          </div>
   </section>
+  
 
   <!-- footer with navigation links and copyright -->
   <footer>
