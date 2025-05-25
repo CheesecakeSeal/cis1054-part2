@@ -44,6 +44,9 @@
   <!-- favourites list section -->
 <section id="favourites-list" class="container">
     <div class="favourites-container">
+      <p id="no-favourites-message" style="display: none; font-size: 1.2em; color: #666;">
+  You have no favourite dishes yet. Go to the <a href="menu.html">menu</a> to add some!
+</p>
         <ul id="fav-list"></ul>
     </div>
     <!-- Mailtrap form submission -->
@@ -88,27 +91,33 @@
   </script>
 
     <script>
-        function renderFavourites() {
-    const list = document.getElementById("fav-list");
-    const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-    list.innerHTML = "";
+    function renderFavourites() {
+  const list = document.getElementById("fav-list");
+  const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+  const message = document.getElementById("no-favourites-message");
 
+  list.innerHTML = "";
+
+  if (favs.length === 0) {
+    message.style.display = "block";
+  } else {
+    message.style.display = "none";
     favs.forEach((dish, index) => {
-        const li = document.createElement("li");
-        li.className = "fav-item";
-        li.innerHTML = `
-            <div class="fav-content">
-                <strong>${dish.name}</strong><br />
-                <span>${dish.desc}</span>
-                <div class="button-wrapper">
-                    <button class="primary-button" onclick="removeFavourite(${index})">Remove</button>
-                </div>
-            </div>
-        `;
-        list.appendChild(li);
+      const li = document.createElement("li");
+      li.className = "fav-item";
+      li.innerHTML = `
+        <div class="fav-content">
+          <strong>${dish.name}</strong><br />
+          <span>${dish.desc}</span>
+          <div class="button-wrapper">
+            <button class="primary-button" onclick="removeFavourite(${index})">Remove</button>
+          </div>
+        </div>
+      `;
+      list.appendChild(li);
     });
+  }
 }
-
         function removeFavourite(index) {
             const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
             favs.splice(index, 1);
