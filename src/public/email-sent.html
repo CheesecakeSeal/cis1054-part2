@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complaint Sent</title>
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--black, #000);
+    }
+
+    #confirmation {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+    }
+
+    .confirmation-content {
+      background-color: rgba(128, 147, 134, 0.5);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(3px);
+      max-width: 500px;
+    }
+
+    .confirmation-content h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    .confirmation-content .check-emoji {
+      font-size: 48px;
+      margin: 16px 0;
+    }
+
+    .confirmation-content p {
+      font-size: 18px;
+      margin: 12px 0;
+    }
+
+    .confirmation-content a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 20px;
+      background-color: var(--primary-dark, #022f1b);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    .confirmation-content a:hover {
+      background-color: #03502f;
+    }
+  </style>
+</head>
+<body>
+  <section id="confirmation">
+    <div class="confirmation-content">
+      <h1>Email Sent!</h1>
+      <div class="check-emoji">💌</div>
+      <p>Your Email has been submitted successfully.</p>
+      <p><a href="index.html">Back to Homepage</a></p>
+    </div>
+  </section>
+</body>
+</html>
