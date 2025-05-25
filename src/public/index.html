@@ -39,7 +39,6 @@
     </div>
   </section>
 
-
   <!-- about us section with text and image -->
   <section id="about" class="container">
     <div class="about-content">
@@ -52,13 +51,30 @@
     </div>
   </section>
 
-    <!-- meet the team section where team members are loaded dynamically -->
+   <!-- meet the team section where team members are loaded dynamically -->
   <section id="team" class="container">
     <h1>Meet the Team</h1>
     <div id="team-section"></div>
   </section>
 
-  <!-- contact us call to action section -->
+      <!-- food gallery carousel -->
+  <section id="food-gallery" class="container">
+      <h1>Our Specials</h1>
+    <div class="carousel-wrapper">
+      <button class="carousel-btn left" onclick="scrollFoodGallery(-1)">&#10094;</button>  
+      <div class="carousel-container" id="food-carousel">   
+        <img src="Images/1.jpg" alt="Sushi 1" class="gallery-img" />   
+        <img src="Images/2.jpg" alt="Sushi 2" class="gallery-img" />
+        <img src="Images/3.jpg" alt="Sushi 3" class="gallery-img" />  
+        <img src="Images/4.jpg" alt="Sushi 4" class="gallery-img" />   
+        <img src="Images/5.jpg" alt="Sushi 5" class="gallery-img" />  
+        <img src="Images/6.jpg" alt="Sushi 6" class="gallery-img" />   
+      </div>  
+      <button class="carousel-btn right" onclick="scrollFoodGallery(1)">&#10095;</button> 
+    </div>
+  </section>
+
+  <!-- contact us section -->
   <section id="contact-us">
     <div class="contact-banner-container">
       <div class="text-wrapper">
@@ -66,7 +82,7 @@
         <p>Have questions, feedback, or just want to say hello? We are always happy to hear from you!</p>
         <button class="primary-button" onclick="location.href='contact.html'">Get in Touch</button>
         </div>
-    </div>
+    </div> 
     </section>
 
     <!-- footer with navigation links and copyright -->
@@ -90,34 +106,53 @@
         navLinks.classList.toggle("active");
     });
     </script>
+    
+    <script>
+    function scrollFoodGallery(direction) {
+      const container = document.getElementById("food-carousel");
+      const scrollAmount = 300; 
+      container.scrollBy({
+        left: direction * scrollAmount,
+        behavior: "smooth"
+      });
+      }
+      </script>
 
     <!-- csv load script to dynamically load about and team content -->
     <script>
-    function loadMainPageCSV(file, aboutId, teamId) {
-        fetch(file)
-            .then(response => response.text())
-            .then(csv => {
-            Papa.parse(csv, {
-            header: true,
-            delimiter: ";",
-            skipEmptyLines: true,
-            complete: function (results) {
-                const aboutTarget = document.getElementById(aboutId);
-                const teamTarget = document.getElementById(teamId);
+  function loadMainPageCSV(file, aboutId, teamId) {
+    fetch(file)
+        .then(response => response.text())
+        .then(csv => {
+        Papa.parse(csv, {
+        header: true,
+        delimiter: ";",
+        skipEmptyLines: true,
+        complete: function (results) {
+            const aboutTarget = document.getElementById(aboutId);
+            const teamTarget = document.getElementById(teamId);
 
-              // clear old content before loading new
-                aboutTarget.innerHTML = "";
-                teamTarget.innerHTML = "";
+            // clear old content before loading new
+            aboutTarget.innerHTML = "";
+            teamTarget.innerHTML = "";
 
-              // load about section text from csv
-                const aboutText = results.data[0]["GenericInfo"];
-                const aboutP = document.createElement("p");
-                aboutP.textContent = aboutText;
-                aboutTarget.appendChild(aboutP);
+            // load about section text from csv
+            const aboutText = results.data[0]["GenericInfo"];
+            const aboutP = document.createElement("p");
+            aboutP.textContent = aboutText;
+            aboutTarget.appendChild(aboutP);
 
-                // load team members from csv keys starting with "Member"
-                Object.keys(results.data[0]).forEach(key => {
-                if (key.startsWith("Member")) {
+            // load history paragraph below about
+            const historyText = results.data[0]["History"];
+            if(historyText) {
+              const historyP = document.createElement("p");
+              historyP.textContent = historyText;
+              aboutTarget.appendChild(historyP);
+            }
+        
+            // load team members from csv keys starting with "Member"
+            Object.keys(results.data[0]).forEach(key => {
+                if (key.startsWith("Member") && !key.endsWith("Desc")) {
                     const raw = results.data[0][key];
                     const [name, role, image] = raw.split(" - ");
 
@@ -131,30 +166,39 @@
                     const h3 = document.createElement("h3");
                     h3.textContent = name.trim();
 
-                    const p = document.createElement("p");
-                    p.textContent = role.trim();
+                    const pRole = document.createElement("p");
+                    pRole.textContent = role.trim();
 
                     div.appendChild(img);
                     div.appendChild(h3);
-                    div.appendChild(p);
+                    div.appendChild(pRole);
+
+                    // add description paragraph for the team member
+                    const descKey = key + "Desc";
+                    if(results.data[0][descKey]) {
+                      const pDesc = document.createElement("p");
+                      pDesc.className = "team-description";
+                      pDesc.textContent = results.data[0][descKey];
+                      div.appendChild(pDesc);
+                    }
 
                     teamTarget.appendChild(div);
                 }
-                });
-            },
-            error: function (err) {
-                console.error("error parsing csv:", err);
-                document.getElementById(aboutId).textContent = "failed to load about section.";
-                document.getElementById(teamId).textContent = "failed to load team section.";
-            }
             });
-        })
-        .catch(error => {
-            console.error("error fetching csv:", error);
+        },
+        error: function (err) {
+            console.error("error parsing csv:", err);
             document.getElementById(aboutId).textContent = "failed to load about section.";
             document.getElementById(teamId).textContent = "failed to load team section.";
+        }
         });
-    }
+    })
+    .catch(error => {
+        console.error("error fetching csv:", error);
+        document.getElementById(aboutId).textContent = "failed to load about section.";
+        document.getElementById(teamId).textContent = "failed to load team section.";
+    });
+}
 
     // call function to load csv data into about and team sections
     loadMainPageCSV("main_page.csv", "about-section", "team-section");

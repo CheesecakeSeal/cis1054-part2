@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Complaint Sent</title>
 
+  <!-- link to external stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* styles for body and html elements */
     body, html {
       margin: 0;
       padding: 0;
@@ -16,6 +18,7 @@
       color: var(--black, #000);
     }
 
+    /* styles for the main confirmation container */
     #confirmation {
       min-height: 100vh;
       display: flex;
@@ -25,6 +28,7 @@
       padding: 16px;
     }
 
+    /* styling for the box */
     .confirmation-content {
       background-color: rgba(128, 147, 134, 0.5);
       padding: 40px;
@@ -34,45 +38,54 @@
       max-width: 500px;
     }
 
+    /* styles for the main heading*/
     .confirmation-content h1 {
       font-size: 48px;
       margin: 0;
     }
 
+    /* styling for the heart emoji */
     .confirmation-content .check-emoji {
       font-size: 48px;
       margin: 16px 0;
     }
 
+    /* paragraph text styling */
     .confirmation-content p {
       font-size: 18px;
       margin: 12px 0;
     }
 
+    /* styling for the link button */
     .confirmation-content a {
       display: inline-block;
       margin-top: 16px;
       padding: 10px 20px;
-      background-color: var(--primary-dark, #022f1b);
+      background-color: var(--dark-green, #022f1b);
       color: white;
       text-decoration: none;
       border-radius: 8px;
       transition: background-color 0.3s ease;
     }
 
+    /* hover effect for the link button */
     .confirmation-content a:hover {
       background-color: #03502f;
     }
   </style>
 </head>
+
 <body>
+  <!-- main section containing the confirmation message -->
   <section id="confirmation">
     <div class="confirmation-content">
       <h1>Email Sent!</h1>
       <div class="check-emoji">💌</div>
       <p>Your Email has been submitted successfully.</p>
+      <!-- link to return to homepage -->
       <p><a href="index.html">Back to Homepage</a></p>
     </div>
   </section>
 </body>
+
 </html>

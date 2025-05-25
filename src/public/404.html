@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>404 - Page Not Found</title>
 
+  <!-- link to external stylesheet -->
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* styles for body and html elements */
     body, html {
       margin: 0;
       padding: 0;
@@ -16,6 +18,7 @@
       color: var(--black, #000);
     }
 
+    /* styles for the main 404 error container */
     #error-404 {
       min-height: 100vh;
       display: flex;
@@ -25,6 +28,7 @@
       padding: 16px;
     }
 
+    /* styling for the content box inside the error container */
     .error-content {
       background-color: rgba(128, 147, 134, 0.5);
       padding: 40px;
@@ -34,47 +38,57 @@
       max-width: 500px;
     }
 
+    /* styles for the large 404 heading */
     .error-content h1 {
       font-size: 80px;
       margin: 0;
     }
 
+    /* styling for the sushi emoji */
     .error-content .sushi-emoji {
       font-size: 48px;
       margin: 16px 0;
     }
 
+    /* paragraph text styling */
     .error-content p {
       font-size: 18px;
       margin: 12px 0;
     }
 
+    /* styling for the link button */
     .error-content a {
       display: inline-block;
       margin-top: 16px;
       padding: 10px 20px;
-      background-color: var(--primary-dark, #022f1b);
+      background-color: var(--dark-green, #022f1b);
       color: white;
       text-decoration: none;
       border-radius: 8px;
       transition: background-color 0.3s ease;
     }
 
+    /* hover effect for the link button */
     .error-content a:hover {
       background-color: #03502f;
     }
     
   </style>
 </head>
+
 <body>
+  <!-- main section containing the 404 error message -->
   <section id="error-404">
     <div class="error-content">
       <h1>404</h1>
       <div class="sushi-emoji">🍣</div>
+      <!-- error message text -->
       <p>Oops! The page you are looking for has rolled away... <br />
         Better luck next time!</p>
+      <!-- link to return to the homepage -->
       <p><a href="index.html">Go back to homepage</a></p>
     </div>
   </section>
 </body>
+
 </html>

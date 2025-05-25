@@ -3,8 +3,8 @@
 
 /* root variables for constant use of colours */
 :root {
-  --primary-light: #74a84a;
-  --primary-dark: #2c541d;
+  --light-green: #74a84a;
+  --dark-green: #2c541d;
   --black: #000000;
   --white: #efefef;
 }
@@ -72,7 +72,7 @@ nav .logo {
   position: absolute;
   right: 16px;
   top: 16px;
-  background: var(--primary-light);
+  background: var(--light-green);
   padding: 8px 12px;
   border-radius: 4px;
   display: none;
@@ -110,7 +110,7 @@ nav .logo {
    --------------- */
 .primary-button {
   padding: 10px 24px;
-  background-color: var(--primary-light);
+  background-color: var(--light-green);
   color: var(--white);
   border: none;
   cursor: pointer;
@@ -119,7 +119,7 @@ nav .logo {
 
 /* hover effect for primary-button */
 .primary-button:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--dark-green);
 }
 
 .primary-button {
@@ -158,7 +158,7 @@ nav .logo {
 /* section heading */
 #team h1 {
   font-size: 32px;
-  color: var(--primary-dark);
+  color: var(--dark-green);
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 10px;
@@ -201,8 +201,15 @@ nav .logo {
 /* about heading */
 .about-content h1 {
   font-size: 32px;
-  color: var(--primary-dark);
+  color: var(--dark-green);
   text-transform: uppercase;
+  text-align: center;
+}
+
+#about-section p {
+  text-align: center;
+  margin-bottom: 1em; 
+  line-height: 1.5;   
 }
 
 /* about image */
@@ -250,6 +257,83 @@ nav .logo {
   margin: 0 auto;
 }
 
+/* -------------------
+   Specials Section
+   ------------------- */
+#food-gallery {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+/* section heading style */
+#food-gallery h1 {
+  font-size: 32px;
+  color: var(--dark-green);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* position the carousel and buttons */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* holding the images */
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+/* hiding scrollbar */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* image style */
+.gallery-img {
+  flex: 0 0 auto;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* zoom in on the image when hovering */
+.gallery-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* carousel button */
+.carousel-btn {
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+/* positioning the button */
+.carousel-btn.left {
+  left: 0;
+}
+
+.carousel-btn.right {
+  right: 0;
+}
+
 /* ---------------
    Footer Section
    --------------- */
@@ -273,7 +357,7 @@ footer ul {
 
 /* footer logo */
 footer .logo {
-  color: var(--primary-dark);
+  color: var(--dark-green);
 }
 
 /* ---------------------
@@ -343,7 +427,7 @@ form {
   padding: 12px ;
   font-size: 16px;
   width: 100%;
-  border: 1px solid var(--primary-dark);
+  border: 1px solid var(--dark-green);
   border-radius: 6px;
   box-sizing: border-box;
 }
@@ -416,7 +500,7 @@ form {
 }
 
 .map iframe {
-  border: 2px solid var(--primary-dark);
+  border: 2px solid var(--dark-green);
   width: 100%;
   min-width: 300px;
   height: 300px;
@@ -485,6 +569,25 @@ form {
   border-top: 1px solid #033205;
 }
 
+
+.carousel-container {
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.gallery-img {
+  width: 200px; /* Smaller image for mobile */
+}
+
+.carousel-btn {
+  font-size: 1.5rem;
+  padding: 0.3rem 0.6rem;
+}
+
+#food-gallery h1 {
+  font-size: 24px;
+}
+
 /* food and drinks list formatting */
 #food-list ul,
 #drinks-list ul {
@@ -505,7 +608,7 @@ form {
 
 #food-list a,
 #drinks-list a {
-  color: var(--primary-dark);
+  color: var(--dark-green);
   font-weight: bold;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -734,7 +837,7 @@ body.dish-page nav a {
 
 /* favourite toggle button */
 #fav-button {
-  background-color: var(--primary-light);
+  background-color: var(--light-green);
   color: var(--white);
   padding: 10px 24px;
   border: none;
@@ -746,13 +849,13 @@ body.dish-page nav a {
 
 /* hover effect for favourite button */
 #fav-button:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--dark-green);
 }
 
 /* link to go back to the menu */
 .back-link {
   font-size: 16px;
-  color: var(--primary-dark);
+  color: var(--dark-green);
   text-decoration: underline;
   transition: color 0.3s ease;
 }
@@ -773,7 +876,7 @@ body.dish-page nav a {
 /* individual nutrition fact card */ 
 .nutrition-card {
   background-color: #f4fbf4;
-  border: 1px solid var(--primary-light);
+  border: 1px solid var(--light-green);
   border-radius: 12px;
   padding: 16px 24px;
   min-width: 120px;
@@ -789,7 +892,7 @@ body.dish-page nav a {
 /* nutrition label */ 
 .nutrition-card h3 {
   font-size: 16px;
-  color: var(--primary-dark);
+  color: var(--dark-green);
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -865,7 +968,7 @@ body.dish-page nav a {
   nav li {
     width: 100%;
     padding: 1rem 0;
-    border-bottom: 1px solid var(--primary-dark);
+    border-bottom: 1px solid var(--dark-green);
     text-align: left;
     font-size: 1.25rem;
   }

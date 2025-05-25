@@ -50,7 +50,6 @@
       <ul id="fav-list"></ul>
     </div>
 
-    <!-- mailtrap form submission -->
     <!-- email form to send favourites -->
     <div class="email-form-container">
       <h2>Send Your Favourites</h2>
@@ -128,23 +127,18 @@
     }
 
     document.getElementById('fav-form').addEventListener('submit', function(event) {
-      // Before submitting, populate hidden fields
       const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
       const email = document.getElementById("email").value;
       const nameInput = document.getElementById("name-input");
       const messageInput = document.getElementById("message-input");
 
-      // Use the user's email as the 'name' field
       nameInput.value = email;
 
-      // Build the message body
       const bodyLines = favs.map(f => `${f.name}: ${f.desc}`);
       messageInput.value = bodyLines.join("\n");
 
-      // Let the form submit normally to /send-email
     });
 
-    // Initial render
     renderFavourites();
   </script>
 </body>
