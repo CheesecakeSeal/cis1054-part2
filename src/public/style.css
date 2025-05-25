@@ -278,7 +278,10 @@ nav .logo {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 /* holding the images */
@@ -286,8 +289,9 @@ nav .logo {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  gap: 1rem;
+  gap: 24px;
   padding: 1rem 0;
+  width: 100%;
 }
 
 /* hiding scrollbar */
@@ -296,12 +300,13 @@ nav .logo {
 }
 
 /* image style */
-.gallery-img {
-  flex: 0 0 auto;
+#food-carousel .gallery-img {
+  flex-shrink: 0;
+  height: 400px;
   width: 300px;
-  height: auto;
   border-radius: 10px;
   object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* zoom in on the image when hovering */
@@ -333,6 +338,7 @@ nav .logo {
 .carousel-btn.right {
   right: 0;
 }
+
 
 /* ---------------
    Footer Section

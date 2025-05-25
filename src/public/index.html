@@ -69,6 +69,12 @@
         <img src="Images/4.jpg" alt="Sushi 4" class="gallery-img" />   
         <img src="Images/5.jpg" alt="Sushi 5" class="gallery-img" />  
         <img src="Images/6.jpg" alt="Sushi 6" class="gallery-img" />   
+        <img src="Images/1.jpg" alt="Sushi 1" class="gallery-img" />   
+        <img src="Images/2.jpg" alt="Sushi 2" class="gallery-img" />
+        <img src="Images/3.jpg" alt="Sushi 3" class="gallery-img" />  
+        <img src="Images/4.jpg" alt="Sushi 4" class="gallery-img" />   
+        <img src="Images/5.jpg" alt="Sushi 5" class="gallery-img" />  
+        <img src="Images/6.jpg" alt="Sushi 6" class="gallery-img" /> 
       </div>  
       <button class="carousel-btn right" onclick="scrollFoodGallery(1)">&#10095;</button> 
     </div>
@@ -110,7 +116,7 @@
     <script>
     function scrollFoodGallery(direction) {
       const container = document.getElementById("food-carousel");
-      const scrollAmount = 300; 
+      const scrollAmount = 390; 
       container.scrollBy({
         left: direction * scrollAmount,
         behavior: "smooth"
