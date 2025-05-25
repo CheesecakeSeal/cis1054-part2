@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kura Udo Sushi</title>
 
-  <!-- link to CSS stylesheet -->
+  <!-- link to css stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -35,38 +35,39 @@
       </nav>
 
       <!-- page header -->
-      <div class="header-container">
+      <div class="header-container animate-fadeInUp">
         <h1>My Favourites</h1>
       </div>
     </div>
   </section>
 
   <!-- favourites list section -->
-<section id="favourites-list" class="container">
+  <section id="favourites-list" class="container animate-fadeInUp">
     <div class="favourites-container">
       <p id="no-favourites-message" style="display: none; font-size: 1.2em; color: #666;">
-  You have no favourite dishes yet. Go to the <a href="menu.html">menu</a> to add some!
-</p>
-        <ul id="fav-list"></ul>
+        You have no favourite dishes yet. Go to the <a href="menu.html">menu</a> to add some!
+      </p>
+      <ul id="fav-list"></ul>
     </div>
-    <!-- Mailtrap form submission -->
-    <!-- Email form to send favourites -->
+
+    <!-- mailtrap form submission -->
+    <!-- email form to send favourites -->
     <div class="email-form-container">
       <h2>Send Your Favourites</h2>
       <p>Enter your email to receive a list of your favourite dishes.</p>
       <form id="fav-form" action="/send-email" method="POST">
-        <input type="hidden" name="formType" value="Favourites" />   
-        <label for="email">Enter your Email:</label><br> 
-        <input type="email" name="email" id="email" placeholder="e.g. you@example.com" required /><br><br>   
-        <input type="hidden" name="name" id="name-input" />    
+        <input type="hidden" name="formType" value="Favourites" />
+        <label for="email">Enter your Email:</label><br />
+        <input type="email" name="email" id="email" placeholder="e.g. you@example.com" required /><br /><br />
+        <input type="hidden" name="name" id="name-input" />
         <input type="hidden" name="subject" value="My Favourite Dishes" />
         <input type="hidden" name="message" id="message-input" />
-    <button type="submit" class="primary-button">Send List</button>
-  </form>
-</div>
-</section>
+        <button type="submit" class="primary-button">Send List</button>
+      </form>
+    </div>
+  </section>
 
-      <!-- footer with navigation links and copyright -->
+  <!-- footer with navigation links and copyright -->
   <footer>
     <ul class="footer-links">
       <li><a href="index.html">Home</a></li>
@@ -90,60 +91,62 @@
     });
   </script>
 
-    <script>
+  <script>
     function renderFavourites() {
-  const list = document.getElementById("fav-list");
-  const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-  const message = document.getElementById("no-favourites-message");
+      const list = document.getElementById("fav-list");
+      const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+      const message = document.getElementById("no-favourites-message");
 
-  list.innerHTML = "";
+      list.innerHTML = "";
 
-  if (favs.length === 0) {
-    message.style.display = "block";
-  } else {
-    message.style.display = "none";
-    favs.forEach((dish, index) => {
-      const li = document.createElement("li");
-      li.className = "fav-item";
-      li.innerHTML = `
-        <div class="fav-content">
-          <strong>${dish.name}</strong><br />
-          <span>${dish.desc}</span>
-          <div class="button-wrapper">
-            <button class="primary-button" onclick="removeFavourite(${index})">Remove</button>
-          </div>
-        </div>
-      `;
-      list.appendChild(li);
-    });
-  }
-}
-        function removeFavourite(index) {
-            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-            favs.splice(index, 1);
-            localStorage.setItem("favourites", JSON.stringify(favs));
-            renderFavourites();
-        }
-
-        document.getElementById('fav-form').addEventListener('submit', function(event) {
-            // Before submitting, populate hidden fields
-            const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-            const email = document.getElementById("email").value;
-            const nameInput = document.getElementById("name-input");
-            const messageInput = document.getElementById("message-input");
-
-            // Use the user's email as the 'name' field
-            nameInput.value = email;
-
-            // Build the message body
-            const bodyLines = favs.map(f => `${f.name}: ${f.desc}`);
-            messageInput.value = bodyLines.join("\n");
-
-            // Let the form submit normally to /send-email
+      if (favs.length === 0) {
+        message.style.display = "block";
+      } else {
+        message.style.display = "none";
+        favs.forEach((dish, index) => {
+          const li = document.createElement("li");
+          li.className = "fav-item";
+          li.innerHTML = `
+            <div class="fav-content">
+              <strong>${dish.name}</strong><br />
+              <span>${dish.desc}</span>
+              <div class="button-wrapper">
+                <button class="primary-button" onclick="removeFavourite(${index})">Remove</button>
+              </div>
+            </div>
+          `;
+          list.appendChild(li);
         });
+      }
+    }
 
-        // Initial render
-        renderFavourites();
-    </script>
+    function removeFavourite(index) {
+      const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+      favs.splice(index, 1);
+      localStorage.setItem("favourites", JSON.stringify(favs));
+      renderFavourites();
+    }
+
+    document.getElementById('fav-form').addEventListener('submit', function(event) {
+      // Before submitting, populate hidden fields
+      const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+      const email = document.getElementById("email").value;
+      const nameInput = document.getElementById("name-input");
+      const messageInput = document.getElementById("message-input");
+
+      // Use the user's email as the 'name' field
+      nameInput.value = email;
+
+      // Build the message body
+      const bodyLines = favs.map(f => `${f.name}: ${f.desc}`);
+      messageInput.value = bodyLines.join("\n");
+
+      // Let the form submit normally to /send-email
+    });
+
+    // Initial render
+    renderFavourites();
+  </script>
 </body>
+
 </html>

@@ -9,7 +9,7 @@
   <!-- link to CSS stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- library for CSV parsing  -->
+  <!-- library for CSV parsing -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 
@@ -38,52 +38,50 @@
       </nav>
 
       <!-- page header -->
-      <div class="header-container">
+      <div class="header-container animate-fadeInUp">
         <h1>Contact Us</h1>
       </div>
     </div>
-  </section> 
+  </section>
 
   <!-- main contact section -->
-  
-  <section id="contact" class="container">
+  <section id="contact" class="container animate-fadeInUp">
     <div class="contact-us-container">
       <h1>Fill in the Form</h1>
       <div class="inputs">
-      <!-- contact form for users to send messages -->
-      <form id="contact-form" action="/send-email" method="POST">
-        <h1></h1>
-        <label for="name">
-          Name:
-          <input type="text" placeholder="Your name" id="name" name="name" required />
-        </label>
+        <!-- contact form for users to send messages -->
+        <form id="contact-form" action="/send-email" method="POST">
+          <label for="name">
+            Name:
+            <input type="text" placeholder="Your name" id="name" name="name" required />
+          </label>
 
-        <label for="email">
-          Email:
-          <input type="email" placeholder="you@example.com"email" name="email" required />
-        </label>
+          <label for="email">
+            Email:
+            <input type="email" placeholder="you@example.com" id="email" name="email" required />
+          </label>
 
-        <label for="subject">
-          Subject:
-          <input type="text" placeholder="Entre Subject" id="subject" name="subject" required />
-        </label>
+          <label for="subject">
+            Subject:
+            <input type="text" placeholder="Enter Subject" id="subject" name="subject" required />
+          </label>
 
-        <label for="message">
-          Message:
-          <textarea id="message" placeholder="Entre Message" name="message" rows="6" required></textarea>
-        </label>
+          <label for="message">
+            Message:
+            <textarea id="message" placeholder="Enter Message" name="message" rows="6" required></textarea>
+          </label>
 
-        <!-- submit button to send the form -->
-        <button type="submit" class="primary-button">SUBMIT</button>
-      </form>
+          <!-- submit button to send the form -->
+          <button type="submit" class="primary-button">SUBMIT</button>
+        </form>
+      </div>
     </div>
-  </div>
 
     <!-- contact details and social media links -->
     <div class="address">
       <h1>Information</h1>
       <div class="details-wrapper">
-        <!-- fake email contact -->
+        <!-- email contact -->
         <div class="detail">
           <img src="Images/envelope.png" alt="Email Icon" />
           <div class="text">
@@ -92,7 +90,7 @@
           </div>
         </div>
 
-        <!-- fake phone contact -->
+        <!-- phone contact -->
         <div class="detail">
           <img src="Images/phone-call.png" alt="Phone Icon" />
           <div class="text">
@@ -101,7 +99,7 @@
           </div>
         </div>
 
-        <!-- fake physical address -->
+        <!-- physical address -->
         <div class="detail">
           <img src="Images/marker.png" alt="Location Icon" />
           <div class="text">
@@ -112,7 +110,7 @@
               Malta
             </p>
           </div>
-        </div> 
+        </div>
 
         <!-- opening hours -->
         <div class="detail">
@@ -124,7 +122,7 @@
         </div>
       </div>
 
-      <!-- fake social media follow links -->
+      <!-- social media follow links -->
       <div class="follow-us-wrapper">
         <h3>Follow Us</h3>
         <ul class="socialLink">
@@ -134,12 +132,21 @@
         </ul>
       </div>
     </div>
-          <!-- embedded google map inside contact section -->
-          <div class="map">
-            <h1>Location Map</h1>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d833.436925080446!2d14.50658561791088!3d35.91349976972494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smt!4v1748186931540!5m2!1sen!2smt" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>          </div>
+
+    <!-- embedded google map inside contact section -->
+    <div class="map">
+      <h1>Location Map</h1>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d833.436925080446!2d14.50658561791088!3d35.91349976972494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2smt!4v1748186931540!5m2!1sen!2smt"
+        width="600"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
   </section>
-  
 
   <!-- footer with navigation links and copyright -->
   <footer>
@@ -155,11 +162,9 @@
 
   <!-- javascript for toggling navigation menu on mobile -->
   <script>
-    // menu button and navigation links container
     const menuButton = document.querySelector(".menu-button");
     const navLinks = document.querySelector(".nav-links");
 
-    // add click event listener to toggle the 'active' class on nav links
     menuButton.addEventListener("click", () => {
       navLinks.classList.toggle("active");
     });

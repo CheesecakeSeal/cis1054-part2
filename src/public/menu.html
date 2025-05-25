@@ -24,9 +24,7 @@
         </div>
 
         <!-- button for toggling navigation on mobile devices -->
-        <button class="menu-button" aria-label="Toggle navigation">
-          &#9776;
-        </button>
+        <button class="menu-button" aria-label="Toggle navigation">&#9776;</button>
 
         <!-- navigation links -->
         <ul class="nav-links">
@@ -38,7 +36,7 @@
       </nav>
 
       <!-- page header -->
-      <div class="header-container">
+      <div class="header-container animate-fadeInUp">
         <h1>Menu</h1>
       </div>
     </div>
@@ -46,16 +44,16 @@
 
   <!-- main menu and drinks section -->
   <section id="menu" class="container">
-  <div class="menu-container">
-    <div class="text-wrapper">
-      <h2>Food</h2>
-      <div id="food-list"></div>
+    <div class="menu-container">
+      <div class="text-wrapper">
+        <h2>Food</h2>
+        <div id="food-list"></div>
 
-      <h2>Drinks</h2>
-      <div id="drinks-list"></div>
+        <h2>Drinks</h2>
+        <div id="drinks-list"></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- footer with navigation links and copyright -->
   <footer>
@@ -79,78 +77,78 @@
     });
   </script>
 
-<!-- JavaScript for loading menu from CSV -->
-<script>
-  class MenuLoader {
-    load(file, targetId, type) {
-      fetch(file)
-        .then(response => response.text())
-        .then(csv => {
-          Papa.parse(csv, {
-            header: true,
-            skipEmptyLines: true,
-            complete: (results) => {
-              this.displayItems(results.data, targetId, type);
-            },
-            error: (err) => {
-              console.error("Error parsing CSV:", err);
-              document.getElementById(targetId).textContent = "Failed to load menu.";
-            }
+  <!-- javascript for loading menu from csv -->
+  <script>
+    class MenuLoader {
+      load(file, targetId, type) {
+        fetch(file)
+          .then(response => response.text())
+          .then(csv => {
+            Papa.parse(csv, {
+              header: true,
+              skipEmptyLines: true,
+              complete: (results) => {
+                this.displayItems(results.data, targetId, type);
+              },
+              error: (err) => {
+                console.error("Error parsing CSV:", err);
+                document.getElementById(targetId).textContent = "Failed to load menu.";
+              }
+            });
+          })
+          .catch(error => {
+            console.error("Error fetching CSV:", error);
+            document.getElementById(targetId).textContent = "Failed to load menu.";
           });
-        })
-        .catch(error => {
-          console.error("Error fetching CSV:", error);
-          document.getElementById(targetId).textContent = "Failed to load menu.";
-        });
-    }
+      }
 
-    displayItems(data, targetId, type) {
-      const target = document.getElementById(targetId);
-      target.innerHTML = '';
+      displayItems(data, targetId, type) {
+        const target = document.getElementById(targetId);
+        target.innerHTML = '';
 
-      const grouped = {};
-      data.forEach(item => {
-        const category = (item.category || "Other").trim();
-        if (!grouped[category]) grouped[category] = [];
-        grouped[category].push(item);
-      });
-
-      const categories = Object.entries(grouped);
-      categories.forEach(([category, items], index) => {
-        const heading = document.createElement("h3");
-        heading.textContent = category;
-        target.appendChild(heading);
-
-        const ul = document.createElement("ul");
-        items.forEach(item => {
-          const id = encodeURIComponent(item.id);
-          ul.insertAdjacentHTML('beforeend', `
-            <li>
-              <a href="dish.html?id=${id}&type=${type}">
-                ${item.name}
-              </a><br/>
-              <small>${item.description}</small> 
-              <strong>${item.price || ""}</strong>
-            </li>
-          `);
+        // group items by category
+        const grouped = {};
+        data.forEach(item => {
+          const category = (item.category || "Other").trim();
+          if (!grouped[category]) grouped[category] = [];
+          grouped[category].push(item);
         });
 
-        target.appendChild(ul);
+        // create category sections
+        const categories = Object.entries(grouped);
+        categories.forEach(([category, items], index) => {
+          const heading = document.createElement("h3");
+          heading.textContent = category;
+          target.appendChild(heading);
 
-        // Add <hr> between categories except the last one
-        if (index < categories.length - 1) {
-          const hr = document.createElement("hr");
-          hr.className = "category-divider";
-          target.appendChild(hr);
-        }
-      });
+          const ul = document.createElement("ul");
+          items.forEach(item => {
+            const id = encodeURIComponent(item.id);
+            ul.insertAdjacentHTML('beforeend', `
+              <li>
+                <a href="dish.html?id=${id}&type=${type}">${item.name}</a><br/>
+                <small>${item.description || ""}</small> 
+                <strong>${item.price || ""}</strong>
+              </li>
+            `);
+          });
+
+          target.appendChild(ul);
+
+          // add <hr> between categories except the last one
+          if (index < categories.length - 1) {
+            const hr = document.createElement("hr");
+            hr.className = "category-divider";
+            target.appendChild(hr);
+          }
+        });
+      }
     }
-  }
 
-  const menuLoader = new MenuLoader();
-  menuLoader.load("food_menu.csv", "food-list", "food");
-  menuLoader.load("drinks_menu.csv", "drinks-list", "drink");
-</script>
+    const menuLoader = new MenuLoader();
+    menuLoader.load("food_menu.csv", "food-list", "food");
+    menuLoader.load("drinks_menu.csv", "drinks-list", "drink");
+  </script>
 </body>
 
 </html>

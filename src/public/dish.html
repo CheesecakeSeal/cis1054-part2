@@ -9,11 +9,12 @@
   <!-- link to CSS stylesheet -->
   <link rel="stylesheet" href="style.css" />
 
-   <!-- library for CSV parsing  -->
+  <!-- library for CSV parsing -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
+
 <body class="dish-page">
-<body>
+
   <!-- header section for navigation -->
   <section id="dish-header">
     <div class="container">
@@ -24,9 +25,7 @@
         </div>
 
         <!-- button for toggling navigation on mobile devices -->
-        <button class="menu-button" aria-label="Toggle navigation">
-          &#9776;
-        </button>
+        <button class="menu-button" aria-label="Toggle navigation">&#9776;</button>
 
         <!-- navigation links -->
         <ul class="nav-links">
@@ -39,43 +38,42 @@
 
       <!-- page header -->
       <div class="header-container">
-        <div class="text-wrapper"> 
-        <h1 id="dish-name">Loading...</h1>
+        <div class="text-wrapper">
+          <h1 id="dish-name">Loading...</h1>
+        </div>
       </div>
     </div>
   </section>
 
- 
-</head>
-
-<body>
   <!-- main dish content -->
-  <div class="dish-container">
+  <main class="dish-container animate-fadeInUp">
     <p id="dish-description"></p>
-    <div class="nutrition-section">
-  <div class="nutrition-card">
-    <h3>Calories</h3>
-    <p id="dish-calories">Loading...</p>
-  </div>
-  <div class="nutrition-card">
-    <h3>Protein</h3>
-    <p id="dish-protein">Loading...</p>
-  </div>
-  <div class="nutrition-card">
-    <h3>Fat</h3>
-    <p id="dish-fat">Loading...</p>
-  </div>
-  <div class="nutrition-card">
-    <h3>Carbs</h3>
-    <p id="dish-carbs">Loading...</p>
-  </div>
-</div>
-      <div class="button-container">
-    <button id="fav-button">Add to Favourites</button>
-    <a class="back-link" href="menu.html">Go to Menu</a>
-    <a class="back-link" href="favourites.html">Go to Favourites</a>
-  </div>
-  </div>
+
+    <section class="nutrition-section" aria-label="Nutrition Information">
+      <div class="nutrition-card">
+        <h3>Calories</h3>
+        <p id="dish-calories">Loading...</p>
+      </div>
+      <div class="nutrition-card">
+        <h3>Protein</h3>
+        <p id="dish-protein">Loading...</p>
+      </div>
+      <div class="nutrition-card">
+        <h3>Fat</h3>
+        <p id="dish-fat">Loading...</p>
+      </div>
+      <div class="nutrition-card">
+        <h3>Carbs</h3>
+        <p id="dish-carbs">Loading...</p>
+      </div>
+    </section>
+
+    <div class="button-container">
+      <button id="fav-button">Add to Favourites</button>
+      <a class="back-link" href="menu.html">Go to Menu</a>
+      <a class="back-link" href="favourites.html">Go to Favourites</a>
+    </div>
+  </main>
 
   <!-- footer -->
   <footer>
@@ -113,6 +111,7 @@
 
     if (!dishId) {
       document.getElementById("dish-name").textContent = "No dish ID provided.";
+      favButton.style.display = "none";
     } else {
       fetch(csvFile)
         .then(response => response.text())
@@ -140,6 +139,7 @@
 
                 const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
                 const alreadyFavorited = favs.some(f => f.id === dish.id && f.name === dish.name);
+
                 if (alreadyFavorited) {
                   favButton.textContent = "Already in Favorites";
                   favButton.disabled = true;
@@ -160,19 +160,24 @@
                 });
               } else {
                 document.getElementById("dish-name").textContent = "Dish Not Found";
+                favButton.style.display = "none";
               }
             },
             error: function(err) {
               console.error("Error parsing CSV:", err);
               document.getElementById("dish-name").textContent = "Error loading dish.";
+              favButton.style.display = "none";
             }
           });
         })
         .catch(error => {
           console.error("Error fetching CSV:", error);
           document.getElementById("dish-name").textContent = "Error loading dish.";
+          favButton.style.display = "none";
         });
     }
   </script>
+
 </body>
+
 </html>

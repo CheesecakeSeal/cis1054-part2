@@ -17,7 +17,7 @@
 
 /* general body style */
 body {
-  font-family: "Delius", sans-serif;
+  font-family: "Delius", Arial, Helvetica, sans-serif;
   background-color: #f4fbf4;
   overflow-x: hidden;
 }
@@ -122,6 +122,14 @@ nav .logo {
   background-color: var(--primary-dark);
 }
 
+.primary-button {
+  transition: transform 0.2s ease;
+}
+
+.primary-button:hover {
+  transform: scale(1.05);
+}
+
 /* ---------------
    Team Section
    --------------- */
@@ -159,6 +167,18 @@ nav .logo {
 /* overall team section padding */
 #team {
   margin-top: 120px;
+}
+
+.team,
+.fav-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team:hover,
+.fav-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  border-radius: 8px;
 }
 
 /* ---------------
@@ -205,7 +225,7 @@ nav .logo {
 }
 
 /* container inside the content section */
-.contact-us-container {
+.contact-banner-container {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -239,6 +259,8 @@ footer {
   padding: 16px 0;
   align-items: center;
   margin-right: 32px;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 /* footer navigation */
@@ -277,9 +299,14 @@ footer .logo {
 }
 
 .contact-us-container {
-  flex: 1;
-  min-width: 350px;
-  max-width: 400px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  gap: 16px;
+  text-align: center;
+  padding: 0 16px;
 }
 
 .address{
@@ -300,7 +327,7 @@ footer .logo {
   margin: 0;
   width: 100%;
 }
-.inputs inputs {
+.inputs input {
   padding: 10px 16px;
   width: 100%;
 }
@@ -503,6 +530,21 @@ small {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease forwards;
 }
 
 /* -------------------
@@ -862,67 +904,113 @@ body.dish-page nav a {
   flex-direction: row; /* side by side */
 }
 
-/* Mobile: stack vertically and reorder picture below text */
+/* -------------------
+   Mobile Responsiveness
+   ------------------- */
 @media (max-width: 768px) {
+  /* General text scaling */
+  .header-container h1 {
+    font-size: 36px;
+    text-align: center;
+  }
+
+  .header-container p {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 72px;
+    right: 16px;
+    background-color: var(--white);
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 1000;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
   #about {
     flex-direction: column;
-  }
-  .about-content {
-    order: 1;  /* text first */
-  }
-  .about-image {
-    order: 2;  /* image below */
-  }
-}
-/* Desktop (default): layout side by side */
-#contact {
-  display: flex;
-  gap: 20px; /* optional spacing */
-  align-items: flex-start;
-  flex-direction: row; /* side by side */
-}
-
-@media (max-width: 768px) {
-  #contact {
-    flex-direction: column;
-    align-items: center; /* center items horizontally */
-    text-align: center;  /* center text */
-  }
-
-  .contact-us-container,
-  .address {
-    width: 100%;
-    max-width: 500px; /* optional max width */
-  }
-
-  .contact-us-container form {
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    text-align: center;
+    padding: 0 16px;
   }
 
-  .contact-us-container label {
+  #about h2,
+  #about p {
+    text-align: center;
     width: 100%;
-    text-align: left; /* keep labels aligned */
   }
 
-  .contact-us-container input,
-  .contact-us-container textarea {
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .address .details-wrapper,
-  .follow-us-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .address .detail {
+  #about img {
     width: 100%;
     max-width: 400px;
+    margin-top: 20px;
+  }
+
+  #team-section {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px;
+  }
+
+  #contact {
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    padding: 0 16px;
+    overflow-x: hidden;
+  }
+
+  .address,
+  .map {
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  footer ul {
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+  }
+
+  .menu-container,
+  .favourites-container {
+    padding: 16px;
+  }
+
+  .menu-container h2,
+  .menu-container h3 {
+    font-size: 20px;
+  }
+
+  #food-list li,
+  #drinks-list li {
+    font-size: 1em;
+  }
+
+  .fav-item {
+    padding: 16px;
+  }
+
+  .text-wrapper {
+    width: 90%;
   }
 }
 
